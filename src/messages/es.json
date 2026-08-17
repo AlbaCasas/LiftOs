@@ -1,0 +1,12 @@
+{
+  "Metadata": {
+    "title": "LiftOS",
+    "description": "App de coaching para powerlifting"
+  },
+  "Header": {
+    "appName": "LiftOS"
+  },
+  "HomePage": {
+    "newWeek": "Nueva semana"
+  }
+}
