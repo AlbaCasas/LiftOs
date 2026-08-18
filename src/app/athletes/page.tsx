@@ -1,11 +1,14 @@
 import { AthleteTable } from "@/features/athletes/ui/athlete-table";
-import { inMemoryAthleteRepository } from "@/features/athletes/infrastructure/athletes";
-import { getAthletes } from "@/features/athletes/application/get-athletes";
 import { getTranslations } from "next-intl/server";
+import { getAthletes } from "@/features/athletes/application/get-athletes";
+import { inMemoryAthleteRepository } from "@/features/athletes/infrastructure/athletes";
 
 export default async function AthletesPage() {
-  const t = await getTranslations("Athletes");
-  const athletes = await getAthletes(inMemoryAthleteRepository);
+  const [athletes, t] = await Promise.all([
+    getAthletes(inMemoryAthleteRepository),
+    getTranslations("Athletes"),
+  ]);
+
   return (
     <main className="p-6">
       <h1 className="text-2xl font-bold">{t("pageTitle")}</h1>
