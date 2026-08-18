@@ -6,8 +6,8 @@ import {
   TableRow,
   TableCell,
 } from "@/components/ui/table";
-import { totalKg } from "../total-kg";
-import { Athlete } from "../type";
+import { totalKg } from "@/features/athletes/domain/total-kg";
+import { Athlete } from "@/features/athletes/domain/athlete";
 import { useTranslations } from "next-intl";
 
 interface AthleteTableProps {

@@ -1,4 +1,4 @@
-import type { Athlete } from "./type";
+import type { Athlete } from "@/features/athletes/domain/athlete";
 
 export const mockAthletes: Athlete[] = [
   {
