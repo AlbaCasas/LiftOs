@@ -8,5 +8,18 @@
   },
   "HomePage": {
     "newWeek": "New week"
+  },
+  "Athletes": {
+    "pageTitle": "Athletes",
+    "table": {
+      "name": "Name",
+      "gender": "Gender",
+      "ageCategory": "Age",
+      "weightClass": "Weight",
+      "squat1rm": "Squat 1RM",
+      "bench1rm": "Bench 1RM",
+      "deadlift1rm": "Deadlift 1RM",
+      "totalKg": "Total Kg"
+    }
   }
 }

@@ -3,7 +3,6 @@ import { Geist } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 
-import { AppHeader } from "@/components/app-header";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 
@@ -25,7 +24,6 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     <html lang={locale} className={cn("font-sans", geist.variable)}>
       <body>
         <NextIntlClientProvider>
-          <AppHeader />
           {children}
         </NextIntlClientProvider>
       </body>

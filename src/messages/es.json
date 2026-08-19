@@ -8,5 +8,18 @@
   },
   "HomePage": {
     "newWeek": "Nueva semana"
+  },
+  "Athletes": {
+    "pageTitle": "Atletas",
+    "table": {
+      "name": "Nombre",
+      "gender": "Género",
+      "ageCategory": "Edad",
+      "weightClass": "Peso",
+      "squat1rm": "Sentadilla 1RM",
+      "bench1rm": "Banca 1RM",
+      "deadlift1rm": "Peso muerto 1RM",
+      "totalKg": "Total Kg"
+    }
   }
 }

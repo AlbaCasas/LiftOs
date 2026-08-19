@@ -1,13 +1,12 @@
-import { getTranslations } from "next-intl/server";
-
-import { Button } from "@/components/ui/button";
+import { getAthletes } from "@/features/athletes/application/get-athletes";
+import { inMemoryAthleteRepository } from "@/features/athletes/infrastructure/athletes";
+import { AthleteTable } from "@/features/athletes/ui/athlete-table";
 
 export default async function Home() {
-  const t = await getTranslations("HomePage");
-
+  const athletes = await getAthletes(inMemoryAthleteRepository);
   return (
     <main className="p-6">
-      <Button>{t("newWeek")}</Button>
+      <AthleteTable athletes={athletes} />
     </main>
   );
 }
