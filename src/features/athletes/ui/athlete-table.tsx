@@ -9,6 +9,7 @@ import {
 import { totalKg } from "@/features/athletes/domain/total-kg";
 import type { Athlete } from "@/features/athletes/domain/athlete";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 interface AthleteTableProps {
   athletes: Athlete[];
@@ -31,8 +32,15 @@ export const AthleteTable = ({ athletes }: AthleteTableProps) => {
       </TableHeader>
       <TableBody>
         {athletes.map((athlete) => (
-          <TableRow key={athlete.id}>
-            <TableCell>{athlete.name}</TableCell>
+          <TableRow key={athlete.id} className="relative cursor-pointer">
+            <TableCell>
+              <Link
+                href={`/athletes/${athlete.id}`}
+                className="after:absolute after:inset-0"
+              >
+                {athlete.name}
+              </Link>
+            </TableCell>
             <TableCell>{athlete.gender}</TableCell>
             <TableCell>{athlete.ageCategory}</TableCell>
             <TableCell>{athlete.weightClass}</TableCell>
