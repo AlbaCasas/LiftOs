@@ -14,6 +14,29 @@ import { totalKg } from "@/features/athletes/domain/total-kg";
 import { cn } from "@/lib/cn";
 import type { Athlete } from "../domain/athlete";
 
+const liftStats = [
+  {
+    labelKey: "table.squat1rm",
+    getValue: (athlete: Athlete) => athlete.squat1rm,
+    emphasized: false,
+  },
+  {
+    labelKey: "table.bench1rm",
+    getValue: (athlete: Athlete) => athlete.bench1rm,
+    emphasized: false,
+  },
+  {
+    labelKey: "table.deadlift1rm",
+    getValue: (athlete: Athlete) => athlete.deadlift1rm,
+    emphasized: false,
+  },
+  {
+    labelKey: "table.totalKg",
+    getValue: totalKg,
+    emphasized: true,
+  },
+] as const;
+
 const LiftStat = ({
   label,
   value,
@@ -25,7 +48,7 @@ const LiftStat = ({
   unit: string;
   emphasized?: boolean;
 }) => (
-  <div
+  <li
     className={cn(
       "rounded-xl px-4 py-5",
       emphasized ? "bg-primary text-primary-foreground" : "bg-muted/60",
@@ -50,7 +73,7 @@ const LiftStat = ({
         {unit}
       </span>
     </p>
-  </div>
+  </li>
 );
 
 export const AthleteDetails = ({ athlete }: { athlete: Athlete }) => {
@@ -79,26 +102,17 @@ export const AthleteDetails = ({ athlete }: { athlete: Athlete }) => {
           </CardDescription>
         </CardHeader>
         <CardContent className="pt-4">
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-            {[
-              { label: t("table.squat1rm"), value: athlete.squat1rm },
-              { label: t("table.bench1rm"), value: athlete.bench1rm },
-              { label: t("table.deadlift1rm"), value: athlete.deadlift1rm },
-              {
-                label: t("table.totalKg"),
-                value: totalKg(athlete),
-                emphasized: true,
-              },
-            ].map((stat) => (
+          <ul className="grid list-none grid-cols-2 gap-3 md:grid-cols-4">
+            {liftStats.map((stat) => (
               <LiftStat
-                key={stat.label}
-                label={stat.label}
-                value={stat.value}
+                key={stat.labelKey}
+                label={t(stat.labelKey)}
+                value={stat.getValue(athlete)}
                 unit={t("kg")}
                 emphasized={stat.emphasized}
               />
             ))}
-          </div>
+          </ul>
         </CardContent>
       </Card>
     </div>
