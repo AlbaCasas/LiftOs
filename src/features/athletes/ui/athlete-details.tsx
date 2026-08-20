@@ -80,27 +80,24 @@ export const AthleteDetails = ({ athlete }: { athlete: Athlete }) => {
         </CardHeader>
         <CardContent className="pt-4">
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-            <LiftStat
-              label={t("table.squat1rm")}
-              value={athlete.squat1rm}
-              unit={t("kg")}
-            />
-            <LiftStat
-              label={t("table.bench1rm")}
-              value={athlete.bench1rm}
-              unit={t("kg")}
-            />
-            <LiftStat
-              label={t("table.deadlift1rm")}
-              value={athlete.deadlift1rm}
-              unit={t("kg")}
-            />
-            <LiftStat
-              label={t("table.totalKg")}
-              value={totalKg(athlete)}
-              unit={t("kg")}
-              emphasized
-            />
+            {[
+              { label: t("table.squat1rm"), value: athlete.squat1rm },
+              { label: t("table.bench1rm"), value: athlete.bench1rm },
+              { label: t("table.deadlift1rm"), value: athlete.deadlift1rm },
+              {
+                label: t("table.totalKg"),
+                value: totalKg(athlete),
+                emphasized: true,
+              },
+            ].map((stat) => (
+              <LiftStat
+                key={stat.label}
+                label={stat.label}
+                value={stat.value}
+                unit={t("kg")}
+                emphasized={stat.emphasized}
+              />
+            ))}
           </div>
         </CardContent>
       </Card>
