@@ -57,7 +57,7 @@ export const AthleteDetails = ({ athlete }: { athlete: Athlete }) => {
   const t = useTranslations("Athletes");
 
   return (
-    <main className="mx-auto max-w-3xl p-6">
+    <div className="mx-auto max-w-3xl">
       <Button variant="ghost" size="sm" className="-ml-2 mb-4" asChild>
         <Link href="/athletes">
           <ArrowLeft />
@@ -104,6 +104,6 @@ export const AthleteDetails = ({ athlete }: { athlete: Athlete }) => {
           </div>
         </CardContent>
       </Card>
-    </main>
+    </div>
   );
 };
