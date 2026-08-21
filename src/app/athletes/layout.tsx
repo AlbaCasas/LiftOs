@@ -1,5 +1,5 @@
-export default function AthletesLayout({
-  children,
-}: LayoutProps<"/athletes">) {
-  return <main className="p-6">{children}</main>;
+import { Shell } from "@/components/common/shell";
+
+export default function AthletesLayout({ children }: LayoutProps<"/athletes">) {
+  return <Shell>{children}</Shell>;
 }
