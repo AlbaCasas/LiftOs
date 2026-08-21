@@ -1,10 +1,5 @@
-import type { Athlete } from "../domain/athlete";
-import type { AthleteRepository } from "../domain/athlete-repository";
+import { postgresAthleteRepository } from "../infrastructure/postgres-athletes";
 
-export const getAthletes = async (repository: AthleteRepository) => {
-  return new Promise<Athlete[]>((resolve) => {
-    setTimeout(() => {
-      resolve(repository.findAll());
-    }, 1000);
-  });
+export const getAthletes = async (repository = postgresAthleteRepository) => {
+  return await repository.findAll();
 };

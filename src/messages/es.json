@@ -11,6 +11,18 @@
   },
   "Athletes": {
     "pageTitle": "Atletas",
+    "backToList": "Atletas",
+    "kg": "kg",
+    "genderValue": {
+      "female": "Mujer",
+      "male": "Hombre"
+    },
+    "ageCategoryValue": {
+      "sub-junior": "Sub-junior",
+      "junior": "Junior",
+      "open": "Open",
+      "masters": "Masters"
+    },
     "table": {
       "name": "Nombre",
       "gender": "Género",

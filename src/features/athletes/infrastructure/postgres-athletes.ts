@@ -1,3 +1,4 @@
+import { eq } from "drizzle-orm";
 import type { Athlete } from "../domain/athlete";
 import type { AthleteRepository } from "../domain/athlete-repository";
 import { db } from "./db";
@@ -15,5 +16,15 @@ export const postgresAthleteRepository: AthleteRepository = {
       return mockAthletes;
     }
     return existing.map(toAthlete);
+  },
+  async findById(id: string) {
+    const existing = await db
+      .select()
+      .from(athletes)
+      .where(eq(athletes.id, id));
+    if (existing.length === 0) {
+      return undefined;
+    }
+    return toAthlete(existing[0]);
   },
 };
