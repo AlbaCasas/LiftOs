@@ -13,10 +13,7 @@ export const postgresAthleteRepository: AthleteRepository = {
     return rows.map(toAthlete);
   },
   async findById(id: string) {
-    const [row] = await db
-      .select()
-      .from(athletes)
-      .where(eq(athletes.id, id));
+    const [row] = await db.select().from(athletes).where(eq(athletes.id, id));
     return row ? toAthlete(row) : undefined;
   },
   async create(athlete) {

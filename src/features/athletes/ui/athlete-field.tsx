@@ -25,15 +25,14 @@ export const AthleteField = ({
   children: ReactNode;
 }) => {
   const describedBy = error ? `${id}-error` : undefined;
-  const control =
-    isValidElement<ControlProps>(children)
-      ? cloneElement(children, {
-          id,
-          className: cn(suffix && "pr-8", children.props.className),
-          "aria-invalid": Boolean(error),
-          "aria-describedby": describedBy,
-        })
-      : children;
+  const control = isValidElement<ControlProps>(children)
+    ? cloneElement(children, {
+        id,
+        className: cn(suffix && "pr-8", children.props.className),
+        "aria-invalid": Boolean(error),
+        "aria-describedby": describedBy,
+      })
+    : children;
 
   return (
     <div className="flex flex-col gap-1.5">
