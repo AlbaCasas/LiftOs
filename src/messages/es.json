@@ -14,6 +14,7 @@
   },
   "Athletes": {
     "pageTitle": "Atletas",
+    "addAthlete": "Añadir atleta",
     "backToList": "Atletas",
     "kg": "kg",
     "genderValue": {
@@ -25,6 +26,23 @@
       "junior": "Junior",
       "open": "Open",
       "masters": "Masters"
+    },
+    "form": {
+      "description": "Datos de competición y 1RMs. La clase de peso depende del género.",
+      "select": "Selecciona",
+      "selectGenderFirst": "Elige primero el género",
+      "squat1rm": "Sentadilla",
+      "bench1rm": "Banca",
+      "deadlift1rm": "Muerto",
+      "save": "Guardar",
+      "saving": "Guardando…",
+      "cancel": "Cancelar",
+      "failed": "No se ha podido guardar. Inténtalo de nuevo.",
+      "errors": {
+        "required": "Obligatorio",
+        "notPositive": "Usa un número entero mayor que 0",
+        "weightClassMismatch": "Esta clase no encaja con el género"
+      }
     },
     "table": {
       "name": "Nombre",
