@@ -6,6 +6,9 @@
   "Header": {
     "appName": "LiftOS"
   },
+  "Nav": {
+    "athletes": "Atletas"
+  },
   "HomePage": {
     "newWeek": "Nueva semana"
   },
