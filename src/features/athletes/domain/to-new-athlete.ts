@@ -6,19 +6,10 @@ import {
   maleWeightClasses,
 } from "./athlete";
 
-const WHOLE_NUMBER_REGEX = /^\d+$/;
-
 const kg = z
-  .string()
-  .trim()
-  .min(1, { error: "required" })
-  .pipe(
-    z
-      .string()
-      .regex(WHOLE_NUMBER_REGEX, { error: "notPositive" })
-      .transform(Number)
-      .refine((value) => value >= 1, { error: "notPositive" }),
-  );
+  .number({ error: "required" })
+  .int({ error: "notPositive" })
+  .min(1, { error: "notPositive" });
 
 const weightClassError = (issue: { input: unknown }) =>
   issue.input === "" ? "required" : "weightClassMismatch";
