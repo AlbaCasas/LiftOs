@@ -44,11 +44,21 @@
         "weightClassMismatch": "This class does not match the gender"
       }
     },
+    "empty": {
+      "title": "No athletes",
+      "description": "Add the first one to see the roster."
+    },
     "table": {
       "name": "Name",
       "gender": "Gender",
       "ageCategory": "Age",
       "weightClass": "Weight",
+      "class": "Class",
+      "sq": "SQ",
+      "bp": "BP",
+      "dl": "DL",
+      "total": "Total",
+      "count": "{count, plural, one {# athlete} other {# athletes}}",
       "squat1rm": "Squat 1RM",
       "bench1rm": "Bench 1RM",
       "deadlift1rm": "Deadlift 1RM",

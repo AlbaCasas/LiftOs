@@ -8,6 +8,8 @@ Sourced from Mobbin (2026-08-23). Prefer these links over guessing. Layout: **ed
 
 [Time2book — Adding clients](https://mobbin.com/flows/07d7390d-cc40-4383-bdec-219f46d4950e): table of people, primary **Add**, short form (name / contact), toast on save. [Midday — Customers](https://mobbin.com/flows/362a6d23-6cee-45c1-b62b-7bc80466fdb3): empty table + one Add, no fake charts.
 
+Roster table (ACZ-10, Mobbin 2026-08-24): identity in the first column (initials + name + muted meta), a pill for class, kg columns right-aligned with `tabular-nums`, short headers **SQ / BP / DL / Total**, a result count under the grid. Sources: [Time2book clients](https://mobbin.com/screens/cbd62408-72e4-4997-97f5-ff18b48b1455), [Midday customers](https://mobbin.com/screens/6a2ff8b1-4e58-4305-b75f-b7d2a27c4c60), [Stripe customers](https://mobbin.com/screens/cffea421-b951-4ba7-8ddd-571a990d3ed1), [Twenty companies](https://mobbin.com/screens/677d015d-a692-4c43-8369-249fd0ba9018). Empty copy lives in the table, not a second Add. Do not add search, KPI cards, Status, Last active, or Trend here ([ACZ-15](https://linear.app/acz-dev/issue/ACZ-15) / [ACZ-13](https://linear.app/acz-dev/issue/ACZ-13)).
+
 LiftOS: same for athletes. One CTA. No Kajabi-style 12-step “new program” wizard — the coach already knows the athlete.
 
 ### Block editor + AI (the money screen)
