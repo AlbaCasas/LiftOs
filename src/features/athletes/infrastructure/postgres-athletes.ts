@@ -2,7 +2,6 @@ import { eq } from "drizzle-orm";
 import type { Athlete } from "../domain/athlete";
 import type { AthleteRepository } from "../domain/athlete-repository";
 import { db } from "./db";
-import { mockAthletes } from "./mock-athletes";
 import { athletes } from "./schema";
 
 const toAthlete = (row: typeof athletes.$inferSelect): Athlete =>
@@ -10,21 +9,15 @@ const toAthlete = (row: typeof athletes.$inferSelect): Athlete =>
 
 export const postgresAthleteRepository: AthleteRepository = {
   async findAll() {
-    const existing = await db.select().from(athletes);
-    if (existing.length === 0) {
-      await db.insert(athletes).values(mockAthletes);
-      return mockAthletes;
-    }
-    return existing.map(toAthlete);
+    const rows = await db.select().from(athletes);
+    return rows.map(toAthlete);
   },
   async findById(id: string) {
-    const existing = await db
-      .select()
-      .from(athletes)
-      .where(eq(athletes.id, id));
-    if (existing.length === 0) {
-      return undefined;
-    }
-    return toAthlete(existing[0]);
+    const [row] = await db.select().from(athletes).where(eq(athletes.id, id));
+    return row ? toAthlete(row) : undefined;
+  },
+  async create(athlete) {
+    await db.insert(athletes).values(athlete);
+    return athlete;
   },
 };
