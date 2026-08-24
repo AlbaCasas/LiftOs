@@ -1,9 +1,11 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useWatch } from "react-hook-form";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
+import { FieldError } from "@/components/ui/field-error";
 import { Input } from "@/components/ui/input";
 import { NativeSelect } from "@/components/ui/native-select";
 import { SheetClose, SheetFooter } from "@/components/ui/sheet";
@@ -13,12 +15,11 @@ import {
   emptyAthleteDraft,
   genders,
   isGender,
-  isWeightClassFor,
   weightClassesFor,
-  type Gender,
   type NewAthleteDraft,
 } from "../domain/athlete";
-import { AthleteField } from "./athlete-field";
+import { newAthleteDraftSchema } from "../domain/to-new-athlete";
+import { AthleteField, athleteControlProps } from "./athlete-field";
 
 const liftFields = [
   { name: "squat1rm", labelKey: "form.squat1rm" },
@@ -28,7 +29,6 @@ const liftFields = [
 
 export const AthleteForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const t = useTranslations("Athletes");
-  const required = t("form.errors.required");
   const {
     control,
     register,
@@ -36,13 +36,22 @@ export const AthleteForm = ({ onSuccess }: { onSuccess: () => void }) => {
     setValue,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm<NewAthleteDraft>({
+  } = useForm<NewAthleteDraft, unknown, NewAthleteDraft>({
+    resolver: zodResolver(newAthleteDraftSchema, undefined, { raw: true }),
     defaultValues: emptyAthleteDraft,
   });
 
   const gender = useWatch({ control, name: "gender" });
-  const weightClasses = gender ? weightClassesFor(gender as Gender) : [];
-  const errorOf = (name: keyof NewAthleteDraft) => errors[name]?.message;
+  const weightClasses = isGender(gender) ? weightClassesFor(gender) : [];
+  const errorOf = (name: keyof NewAthleteDraft) => {
+    const key = errors[name]?.message;
+    if (!key) return;
+    if (key === "notPositive") return t("form.errors.notPositive");
+    if (key === "weightClassMismatch") {
+      return t("form.errors.weightClassMismatch");
+    }
+    return t("form.errors.required");
+  };
 
   const onSubmit = handleSubmit(async (draft) => {
     const result = await createAthlete(draft);
@@ -58,7 +67,8 @@ export const AthleteForm = ({ onSuccess }: { onSuccess: () => void }) => {
       <div className="flex flex-1 flex-col gap-4 overflow-y-auto px-4">
         <AthleteField id="name" label={t("table.name")} error={errorOf("name")}>
           <Input
-            {...register("name", { required })}
+            {...register("name")}
+            {...athleteControlProps("name", errorOf("name"))}
             autoComplete="name"
             autoFocus
           />
@@ -72,9 +82,9 @@ export const AthleteForm = ({ onSuccess }: { onSuccess: () => void }) => {
           >
             <NativeSelect
               {...register("gender", {
-                required,
                 onChange: () => setValue("weightClass", ""),
               })}
+              {...athleteControlProps("gender", errorOf("gender"))}
             >
               <option value="">{t("form.select")}</option>
               {genders.map((value) => (
@@ -90,7 +100,10 @@ export const AthleteForm = ({ onSuccess }: { onSuccess: () => void }) => {
             label={t("table.ageCategory")}
             error={errorOf("ageCategory")}
           >
-            <NativeSelect {...register("ageCategory", { required })}>
+            <NativeSelect
+              {...register("ageCategory")}
+              {...athleteControlProps("ageCategory", errorOf("ageCategory"))}
+            >
               <option value="">{t("form.select")}</option>
               {ageCategories.map((value) => (
                 <option key={value} value={value}>
@@ -107,13 +120,8 @@ export const AthleteForm = ({ onSuccess }: { onSuccess: () => void }) => {
           error={errorOf("weightClass")}
         >
           <NativeSelect
-            {...register("weightClass", {
-              required,
-              validate: (value, values) =>
-                !isGender(values.gender) ||
-                isWeightClassFor(values.gender, value) ||
-                t("form.errors.weightClassMismatch"),
-            })}
+            {...register("weightClass")}
+            {...athleteControlProps("weightClass", errorOf("weightClass"))}
             disabled={!gender}
           >
             <option value="">
@@ -137,12 +145,8 @@ export const AthleteForm = ({ onSuccess }: { onSuccess: () => void }) => {
               suffix={t("kg")}
             >
               <Input
-                {...register(name, {
-                  required,
-                  validate: (value) =>
-                    (/^\d+$/.test(value) && Number(value) >= 1) ||
-                    t("form.errors.notPositive"),
-                })}
+                {...register(name)}
+                {...athleteControlProps(name, errorOf(name))}
                 type="number"
                 inputMode="numeric"
                 min={1}
@@ -153,9 +157,7 @@ export const AthleteForm = ({ onSuccess }: { onSuccess: () => void }) => {
         </div>
 
         {errors.root?.message ? (
-          <p className="text-sm text-destructive" role="alert">
-            {errors.root.message}
-          </p>
+          <FieldError className="text-sm">{errors.root.message}</FieldError>
         ) : null}
       </div>
 

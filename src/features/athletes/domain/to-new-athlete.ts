@@ -1,46 +1,61 @@
+import { z } from "zod";
+
 import {
-  isAgeCategory,
-  isFemaleWeightClass,
-  isGender,
-  isMaleWeightClass,
-  type NewAthlete,
-  type NewAthleteDraft,
+  ageCategories,
+  femaleWeightClasses,
+  maleWeightClasses,
 } from "./athlete";
 
-const toKg = (raw: string) => {
-  const value = raw.trim();
-  if (!/^\d+$/.test(value)) return undefined;
-  const kg = Number(value);
-  return kg >= 1 ? kg : undefined;
-};
+const WHOLE_NUMBER_REGEX = /^\d+$/;
 
-export const toNewAthlete = (draft: NewAthleteDraft): NewAthlete | undefined => {
-  const name = draft.name.trim();
-  const gender = draft.gender.trim();
-  const ageCategory = draft.ageCategory.trim();
-  const weightClass = draft.weightClass.trim();
-  const squat1rm = toKg(draft.squat1rm);
-  const bench1rm = toKg(draft.bench1rm);
-  const deadlift1rm = toKg(draft.deadlift1rm);
+const kg = z
+  .string()
+  .trim()
+  .min(1, { error: "required" })
+  .pipe(
+    z
+      .string()
+      .regex(WHOLE_NUMBER_REGEX, { error: "notPositive" })
+      .transform(Number)
+      .refine((value) => value >= 1, { error: "notPositive" }),
+  );
 
-  if (
-    !name ||
-    squat1rm === undefined ||
-    bench1rm === undefined ||
-    deadlift1rm === undefined ||
-    !isGender(gender) ||
-    !isAgeCategory(ageCategory)
-  ) {
-    return undefined;
-  }
+const weightClassError = (issue: { input: unknown }) =>
+  issue.input === "" ? "required" : "weightClassMismatch";
 
-  const shared = { name, ageCategory, squat1rm, bench1rm, deadlift1rm };
+const athleteClassSchema = z.discriminatedUnion(
+  "gender",
+  [
+    z.object({
+      gender: z.literal("female"),
+      weightClass: z.enum(femaleWeightClasses, { error: weightClassError }),
+    }),
+    z.object({
+      gender: z.literal("male"),
+      weightClass: z.enum(maleWeightClasses, { error: weightClassError }),
+    }),
+  ],
+  { error: "required" },
+);
 
-  if (gender === "female" && isFemaleWeightClass(weightClass)) {
-    return { ...shared, gender, weightClass };
-  }
-
-  if (gender === "male" && isMaleWeightClass(weightClass)) {
-    return { ...shared, gender, weightClass };
-  }
-};
+export const newAthleteDraftSchema = z
+  .object({
+    name: z.string().trim().min(1, { error: "required" }),
+    gender: z.string().min(1, { error: "required" }),
+    ageCategory: z.string().pipe(z.enum(ageCategories, { error: "required" })),
+    weightClass: z.string(),
+    squat1rm: kg,
+    bench1rm: kg,
+    deadlift1rm: kg,
+  })
+  .pipe(
+    z
+      .object({
+        name: z.string(),
+        ageCategory: z.enum(ageCategories),
+        squat1rm: z.number(),
+        bench1rm: z.number(),
+        deadlift1rm: z.number(),
+      })
+      .and(athleteClassSchema),
+  );
