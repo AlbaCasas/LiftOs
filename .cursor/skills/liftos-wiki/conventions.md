@@ -34,11 +34,14 @@ Pages call use cases. Use cases talk to repository interfaces. Postgres adapter 
 
 **One database.** Neon + Drizzle stays. Vercel is the **host** for Next (pages + future Route Handlers), not a second database and not a replacement for Neon.
 
-| Client | How it reads |
+Coach web writes use a Server Action (`"use server"`). Do not add webrpc or REST until a second client (athlete app) exists.
+
+| Client | How it talks to Neon |
 |---|---|
-| Coach web (now) | Server Component → use case → Drizzle. No HTTP. |
+| Coach web reads | Server Component → use case → Drizzle. No HTTP. |
+| Coach web writes | Server Action → Zod → Drizzle. |
 | Athlete mobile (later) | `fetch` → `app/api/athlete/*` → **same** use case → same Neon. |
 
-Do not build those routes until an athlete client exists. Do not stand up a separate REST service “to be cheaper” — at this scale one Next deploy + one Neon is the cheap path. Athlete MVP is read-only: the assigned block. Auth for athletes is a second identity, not the coach session.
+Do not build those athlete routes until that client exists. Do not stand up a separate REST service “to be cheaper” — at this scale one Next deploy + one Neon is the cheap path. Athlete MVP is read-only: the assigned block. Auth for athletes is a second identity, not the coach session.
 
 **AI later.** Coach-only `POST /api/ai/block-chat` on the same Next app. Provider key stays on the server. Meter in Neon. See [ai.md](ai.md).
