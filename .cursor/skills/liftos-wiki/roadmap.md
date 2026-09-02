@@ -7,6 +7,7 @@ Work **in order**. A later milestone stays Backlog until the previous one can sh
 - Foundations (stack, pnpm, shadcn, folders).
 - Athletes list + detail, feature layers, Neon/Drizzle persist.
 - [ACZ-9](https://linear.app/acz-dev/issue/ACZ-9) sidebar shell (merged).
+- [ACZ-12](https://linear.app/acz-dev/issue/ACZ-12) add athlete + persist (merged).
 
 ## Now — Athletes dashboard
 
@@ -14,8 +15,7 @@ Finish the roster before Blocks.
 
 | ID | Title | Do next? |
 |---|---|---|
-| [ACZ-12](https://linear.app/acz-dev/issue/ACZ-12) | Add athlete + persist | **Yes.** Without create, no real coach. |
-| [ACZ-10](https://linear.app/acz-dev/issue/ACZ-10) | Restyle table | After create, or skip if Blocks needs the week. |
+| [ACZ-10](https://linear.app/acz-dev/issue/ACZ-10) | Restyle table | **Yes.** Roster should look like a dashboard, not a spreadsheet dump. |
 | [ACZ-14](https://linear.app/acz-dev/issue/ACZ-14) | Nested names in sidebar | Polish. |
 | [ACZ-15](https://linear.app/acz-dev/issue/ACZ-15) | Filter / sort / search | After a few real athletes exist. |
 | [ACZ-13](https://linear.app/acz-dev/issue/ACZ-13) | Status, last active, trend | Needs sessions logged. **Defer.** |

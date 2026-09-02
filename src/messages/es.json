@@ -44,11 +44,21 @@
         "weightClassMismatch": "Esta clase no encaja con el género"
       }
     },
+    "empty": {
+      "title": "No hay atletas",
+      "description": "Añade el primero para ver el roster."
+    },
     "table": {
       "name": "Nombre",
       "gender": "Género",
       "ageCategory": "Edad",
       "weightClass": "Peso",
+      "class": "Clase",
+      "sq": "SQ",
+      "bp": "BP",
+      "dl": "DL",
+      "total": "Total",
+      "count": "{count, plural, one {# atleta} other {# atletas}}",
       "squat1rm": "Sentadilla 1RM",
       "bench1rm": "Banca 1RM",
       "deadlift1rm": "Peso muerto 1RM",
