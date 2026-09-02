@@ -62,9 +62,9 @@ export type NewAthleteDraft = {
   gender: string;
   ageCategory: string;
   weightClass: string;
-  squat1rm: number;
-  bench1rm: number;
-  deadlift1rm: number;
+  squat1rm: number | undefined;
+  bench1rm: number | undefined;
+  deadlift1rm: number | undefined;
 };
 
 export const emptyAthleteDraft: NewAthleteDraft = {
@@ -72,9 +72,9 @@ export const emptyAthleteDraft: NewAthleteDraft = {
   gender: "",
   ageCategory: "",
   weightClass: "",
-  squat1rm: Number.NaN,
-  bench1rm: Number.NaN,
-  deadlift1rm: Number.NaN,
+  squat1rm: undefined,
+  bench1rm: undefined,
+  deadlift1rm: undefined,
 };
 
 export const weightClassesFor = (gender: Gender) =>

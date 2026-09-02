@@ -9,7 +9,14 @@ import {
 const kg = z
   .number({ error: "required" })
   .int({ error: "notPositive" })
-  .min(1, { error: "notPositive" });
+  .min(1, { error: "notPositive" })
+  .optional()
+  .pipe(
+    z
+      .number({ error: "required" })
+      .int({ error: "notPositive" })
+      .min(1, { error: "notPositive" }),
+  );
 
 const weightClassError = (issue: { input: unknown }) =>
   issue.input === "" ? "required" : "weightClassMismatch";

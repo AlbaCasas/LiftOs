@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTransition } from "react";
 import { FormProvider, useForm, useWatch } from "react-hook-form";
 import { useTranslations } from "next-intl";
 
@@ -28,6 +29,7 @@ const liftFields = [
 
 export const AthleteForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const t = useTranslations("Athletes");
+  const [isPending, startTransition] = useTransition();
   const form = useForm({
     resolver: zodResolver(newAthleteDraftSchema),
     defaultValues: emptyAthleteDraft,
@@ -38,19 +40,21 @@ export const AthleteForm = ({ onSuccess }: { onSuccess: () => void }) => {
     handleSubmit,
     setValue,
     setError,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = form;
 
   const gender = useWatch({ control, name: "gender" });
   const weightClasses = isGender(gender) ? weightClassesFor(gender) : [];
 
-  const onSubmit = handleSubmit(async (draft) => {
-    const result = await createAthlete(draft);
-    if (!result.ok) {
-      setError("root", { message: result.message ?? t("form.failed") });
-      return;
-    }
-    onSuccess();
+  const onSubmit = handleSubmit((draft) => {
+    startTransition(async () => {
+      const result = await createAthlete(draft);
+      if (result && !result.ok) {
+        setError("root", { message: result.message ?? t("form.failed") });
+        return;
+      }
+      onSuccess();
+    });
   });
 
   return (
@@ -111,7 +115,13 @@ export const AthleteForm = ({ onSuccess }: { onSuccess: () => void }) => {
                 suffix={t("kg")}
               >
                 <Input
-                  {...register(name, { valueAsNumber: true })}
+                  {...register(name, {
+                    setValueAs: (value) => {
+                      if (value === "" || value === undefined) return undefined;
+                      const n = Number(value);
+                      return Number.isNaN(n) ? undefined : n;
+                    },
+                  })}
                   type="number"
                   inputMode="numeric"
                   min={1}
@@ -132,8 +142,8 @@ export const AthleteForm = ({ onSuccess }: { onSuccess: () => void }) => {
               {t("form.cancel")}
             </Button>
           </SheetClose>
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? t("form.saving") : t("form.save")}
+          <Button type="submit" disabled={isPending}>
+            {isPending ? t("form.saving") : t("form.save")}
           </Button>
         </SheetFooter>
       </form>

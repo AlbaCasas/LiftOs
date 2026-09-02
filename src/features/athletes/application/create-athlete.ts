@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { refresh, revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
 
 import { requireCoachId } from "@/features/auth/application/require-coach";
@@ -28,5 +28,6 @@ export const createAthlete = async (draft: NewAthleteDraft) => {
   }
 
   revalidatePath("/athletes");
+  refresh();
   return { ok: true };
 };
