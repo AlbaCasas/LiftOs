@@ -2,7 +2,7 @@
 
 ## Stack (do not reopen)
 
-Next.js 16 App Router, React 19, TypeScript, pnpm, Tailwind 4, shadcn (`radix-nova`), next-intl (default `es`), Neon + Drizzle.
+Next.js 16 App Router, React 19, TypeScript, pnpm, Tailwind 4, shadcn (`radix-nova`), next-intl (default `es`), Auth.js / NextAuth (coach sign-in), Neon + Drizzle.
 
 ## Folders
 
@@ -12,7 +12,8 @@ Next.js 16 App Router, React 19, TypeScript, pnpm, Tailwind 4, shadcn (`radix-no
 | `src/components/ui/` | shadcn primitives. |
 | `src/components/common/` | App chrome (Shell). |
 | `src/features/<name>/` | `domain` / `application` / `infrastructure` / `ui`. |
-| `src/proxy.ts` | Redirect `/` and `/home` → `/athletes`. |
+| `src/auth.ts` | Auth.js config. Session `user.id` is the coach id. |
+| `src/proxy.ts` | Redirect `/` and `/home`. |
 
 Root `layout.tsx` = `html` / `body` / i18n. Nested layouts attach shells. Pages do not wrap themselves in `Shell`.
 
@@ -31,6 +32,10 @@ Root `layout.tsx` = `html` / `body` / i18n. Nested layouts attach shells. Pages 
 ## Data
 
 Pages call use cases. Use cases talk to repository interfaces. Postgres adapter is the default. Do not add a public `/api` for a Server Component read unless there is a client that needs it.
+
+Coach identity is the Auth.js session `user.id` (row in `users`). Use cases that read or write athletes call `requireCoachId`. The proxy is only an optimistic redirect — not the security boundary.
+
+`/api/auth/*` is the Auth.js route handler. That is the exception to “no public API” until a second client exists.
 
 **One database.** Neon + Drizzle stays. Vercel is the **host** for Next (pages + future Route Handlers), not a second database and not a replacement for Neon.
 
