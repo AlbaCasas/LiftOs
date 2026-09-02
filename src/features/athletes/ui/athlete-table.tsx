@@ -11,6 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import type { Athlete } from "@/features/athletes/domain/athlete";
+import type { AthleteWithAvatar } from "@/features/athletes/domain/athlete-avatar";
 import { totalKg } from "@/features/athletes/domain/total-kg";
 import { cn } from "@/lib/cn";
 import { AthleteAvatar } from "./athlete-avatar";
@@ -64,7 +65,7 @@ const KgCell = ({
   </TableCell>
 );
 
-const AthleteTableRow = ({ athlete }: { athlete: Athlete }) => {
+const AthleteTableRow = ({ athlete }: { athlete: AthleteWithAvatar }) => {
   const t = useTranslations("Athletes");
 
   return (
@@ -74,7 +75,7 @@ const AthleteTableRow = ({ athlete }: { athlete: Athlete }) => {
           href={`/athletes/${athlete.id}`}
           className="flex items-center gap-3 after:absolute after:inset-0"
         >
-          <AthleteAvatar id={athlete.id} name={athlete.name} />
+          <AthleteAvatar {...athlete.avatar} />
           <span className="min-w-0">
             <span className="block font-medium">{athlete.name}</span>
             <span className="block text-xs text-muted-foreground">
@@ -98,7 +99,11 @@ const AthleteTableRow = ({ athlete }: { athlete: Athlete }) => {
   );
 };
 
-export const AthleteTable = ({ athletes }: { athletes: Athlete[] }) => {
+export const AthleteTable = ({
+  athletes,
+}: {
+  athletes: AthleteWithAvatar[];
+}) => {
   const t = useTranslations("Athletes");
 
   if (athletes.length === 0) return <EmptyRoster />;
