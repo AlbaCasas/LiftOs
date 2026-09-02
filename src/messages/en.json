@@ -9,6 +9,24 @@
   "Nav": {
     "athletes": "Athletes"
   },
+  "Auth": {
+    "signInTitle": "Sign in",
+    "signInDescription": "Use the email and password for your coach account.",
+    "email": "Email",
+    "password": "Password",
+    "submitSignIn": "Sign in",
+    "submitSignUp": "Create account",
+    "submitting": "One moment…",
+    "invalid": "Incorrect email or password",
+    "emailTaken": "An account with this email already exists",
+    "passwordHint": "Password must be at least 8 characters",
+    "failed": "Could not continue. Try again.",
+    "toSignUp": "No account? Create one",
+    "toSignIn": "Already have an account? Sign in",
+    "signUpTitle": "Create account",
+    "signUpDescription": "One account per coach. Athletes stay on yours only.",
+    "signOut": "Sign out"
+  },
   "HomePage": {
     "newWeek": "New week"
   },

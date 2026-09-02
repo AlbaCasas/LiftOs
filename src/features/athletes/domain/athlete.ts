@@ -55,7 +55,7 @@ type AthleteClass =
   | { gender: "male"; weightClass: MaleWeightClass };
 
 export type NewAthlete = AthleteStats & AthleteClass;
-export type Athlete = NewAthlete & { id: string };
+export type Athlete = NewAthlete & { id: string; coachId: string };
 
 export type NewAthleteDraft = {
   name: string;

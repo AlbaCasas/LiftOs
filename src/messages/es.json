@@ -9,6 +9,24 @@
   "Nav": {
     "athletes": "Atletas"
   },
+  "Auth": {
+    "signInTitle": "Entrar",
+    "signInDescription": "Usa el email y la contraseña de tu cuenta de coach.",
+    "email": "Email",
+    "password": "Contraseña",
+    "submitSignIn": "Entrar",
+    "submitSignUp": "Crear cuenta",
+    "submitting": "Un momento…",
+    "invalid": "Email o contraseña incorrectos",
+    "emailTaken": "Ya existe una cuenta con este email",
+    "passwordHint": "La contraseña debe tener al menos 8 caracteres",
+    "failed": "No se ha podido continuar. Inténtalo de nuevo.",
+    "toSignUp": "¿No tienes cuenta? Crear una",
+    "toSignIn": "¿Ya tienes cuenta? Entrar",
+    "signUpTitle": "Crear cuenta",
+    "signUpDescription": "Una cuenta por coach. Los atletas quedan solo en la tuya.",
+    "signOut": "Salir"
+  },
   "HomePage": {
     "newWeek": "Nueva semana"
   },
