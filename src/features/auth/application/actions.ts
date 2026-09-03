@@ -7,19 +7,19 @@ import { signIn, signOut } from "@/auth";
 import { hashPassword } from "../infrastructure/password";
 import { coachRepository } from "../infrastructure/postgres-coaches";
 
-const emailAndPassword = (formData: FormData) => ({
-  email: String(formData.get("email") ?? "")
+const emailAndPassword = (credentials: FormData) => ({
+  email: String(credentials.get("email") ?? "")
     .toLowerCase()
     .trim(),
-  password: String(formData.get("password") ?? ""),
+  password: String(credentials.get("password") ?? ""),
 });
 
 export const signInCoach = async (
   _state: { message?: string } | undefined,
-  formData: FormData,
+  signinData: FormData,
 ) => {
   const t = await getTranslations("Auth");
-  const { email, password } = emailAndPassword(formData);
+  const { email, password } = emailAndPassword(signinData);
   if (!email || !password) return { message: t("invalid") };
 
   try {
