@@ -36,10 +36,10 @@ export const signInCoach = async (
 
 export const signUpCoach = async (
   _state: { message?: string } | undefined,
-  formData: FormData,
+  signupData: FormData,
 ) => {
   const t = await getTranslations("Auth");
-  const { email, password } = emailAndPassword(formData);
+  const { email, password } = emailAndPassword(signupData);
   if (!email || !password) return { message: t("invalid") };
   if (password.length < 8) return { message: t("passwordHint") };
 
