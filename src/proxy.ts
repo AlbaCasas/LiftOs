@@ -2,13 +2,20 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 export function proxy(request: NextRequest) {
-  const signedIn =
+  const hasToken =
     request.cookies.has("authjs.session-token") ||
     request.cookies.has("__Secure-authjs.session-token");
-  const next = signedIn ? "/athletes" : "/sign-in";
-  return NextResponse.redirect(new URL(next, request.url));
+  const isAuthPage = ["/sign-in", "/sign-up"].includes(
+    request.nextUrl.pathname,
+  );
+  if (!hasToken && !isAuthPage) {
+    return NextResponse.redirect(new URL("/sign-in", request.url));
+  }
+  if (hasToken && isAuthPage) {
+    return NextResponse.redirect(new URL("/athletes", request.url));
+  }
+  return NextResponse.next();
 }
-
 export const config = {
-  matcher: ["/", "/home"],
+  matcher: ["/((?!api/auth|_next|favicon.ico).*)"],
 };
