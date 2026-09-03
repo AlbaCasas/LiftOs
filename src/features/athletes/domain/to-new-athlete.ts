@@ -7,13 +7,11 @@ import {
 } from "./athlete";
 
 const kg = z
-  .number({ error: "required" })
-  .int({ error: "notPositive" })
-  .min(1, { error: "notPositive" })
-  .optional()
+  .string()
+  .min(1, { error: "required" })
   .pipe(
-    z
-      .number({ error: "required" })
+    z.coerce
+      .number<string>({ error: "notPositive" })
       .int({ error: "notPositive" })
       .min(1, { error: "notPositive" }),
   );

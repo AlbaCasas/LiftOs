@@ -57,24 +57,16 @@ type AthleteClass =
 export type NewAthlete = AthleteStats & AthleteClass;
 export type Athlete = NewAthlete & { id: string; coachId: string };
 
-export type NewAthleteDraft = {
-  name: string;
-  gender: string;
-  ageCategory: string;
-  weightClass: string;
-  squat1rm: number | undefined;
-  bench1rm: number | undefined;
-  deadlift1rm: number | undefined;
-};
+export type NewAthleteDraft = Record<AthleteField, string>;
 
 export const emptyAthleteDraft: NewAthleteDraft = {
   name: "",
   gender: "",
   ageCategory: "",
   weightClass: "",
-  squat1rm: undefined,
-  bench1rm: undefined,
-  deadlift1rm: undefined,
+  squat1rm: "",
+  bench1rm: "",
+  deadlift1rm: "",
 };
 
 export const weightClassesFor = (gender: Gender) =>

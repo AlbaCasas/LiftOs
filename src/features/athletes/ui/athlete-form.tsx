@@ -31,7 +31,7 @@ export const AthleteForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const t = useTranslations("Athletes");
   const [isPending, startTransition] = useTransition();
   const form = useForm({
-    resolver: zodResolver(newAthleteDraftSchema),
+    resolver: zodResolver(newAthleteDraftSchema, undefined, { raw: true }),
     defaultValues: emptyAthleteDraft,
   });
   const {
@@ -115,13 +115,7 @@ export const AthleteForm = ({ onSuccess }: { onSuccess: () => void }) => {
                 suffix={t("kg")}
               >
                 <Input
-                  {...register(name, {
-                    setValueAs: (value) => {
-                      if (value === "" || value === undefined) return undefined;
-                      const n = Number(value);
-                      return Number.isNaN(n) ? undefined : n;
-                    },
-                  })}
+                  {...register(name)}
                   type="number"
                   inputMode="numeric"
                   min={1}
