@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
 import { verifyPassword } from "@/features/auth/infrastructure/password";
-import { postgresCoachRepository } from "@/features/auth/infrastructure/postgres-coaches";
+import { coachRepository } from "@/features/auth/infrastructure/postgres-coaches";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
@@ -23,7 +23,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           typeof credentials.password === "string" ? credentials.password : "";
         if (!email || !password) return null;
 
-        const user = await postgresCoachRepository.findByEmail(email);
+        const user = await coachRepository.findByEmail(email);
         if (!user) return null;
 
         const ok = await verifyPassword(password, user.passwordHash);

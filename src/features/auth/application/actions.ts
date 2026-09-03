@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 
 import { signIn, signOut } from "@/auth";
 import { hashPassword } from "../infrastructure/password";
-import { postgresCoachRepository } from "../infrastructure/postgres-coaches";
+import { coachRepository } from "../infrastructure/postgres-coaches";
 
 const emailAndPassword = (formData: FormData) => ({
   email: String(formData.get("email") ?? "")
@@ -43,12 +43,12 @@ export const signUpCoach = async (
   if (!email || !password) return { message: t("invalid") };
   if (password.length < 8) return { message: t("passwordHint") };
 
-  if (await postgresCoachRepository.findByEmail(email)) {
+  if (await coachRepository.findByEmail(email)) {
     return { message: t("emailTaken") };
   }
 
   try {
-    await postgresCoachRepository.create({
+    await coachRepository.create({
       id: crypto.randomUUID(),
       email,
       passwordHash: await hashPassword(password),

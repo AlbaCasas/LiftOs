@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { users } from "./schema";
 
-export const postgresCoachRepository = {
+export const coachRepository = {
   async findByEmail(email: string) {
     const [row] = await db.select().from(users).where(eq(users.email, email));
     return row;

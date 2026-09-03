@@ -7,7 +7,7 @@ import { athletes } from "./schema";
 const toAthlete = (row: typeof athletes.$inferSelect): Athlete =>
   row as Athlete;
 
-export const postgresAthleteRepository: AthleteRepository = {
+export const athleteRepository: AthleteRepository = {
   async findAll(coachId) {
     const rows = await db
       .select()
