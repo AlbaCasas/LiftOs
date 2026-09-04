@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import Google from "next-auth/providers/google";
 
 import { verifyPassword } from "@/features/auth/infrastructure/password";
 import { coachRepository } from "@/features/auth/infrastructure/postgres-coaches";
@@ -9,6 +10,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   session: { strategy: "jwt" },
   pages: { signIn: "/sign-in" },
   providers: [
+    Google({
+      clientId: process.env.AUTH_GOOGLE_ID,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+    }),
     Credentials({
       credentials: {
         email: { type: "email" },
@@ -24,7 +29,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!email || !password) return null;
 
         const user = await coachRepository.findByEmail(email);
-        if (!user) return null;
+        if (!user?.passwordHash) return null;
 
         const ok = await verifyPassword(password, user.passwordHash);
         if (!ok) return null;
@@ -34,7 +39,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    jwt({ token, user }) {
+    signIn({ account, user }) {
+      if (account?.provider === "google") return Boolean(user.email);
+      return true;
+    },
+    async jwt({ token, user, account }) {
+      if (account?.provider === "google") {
+        const email =
+          typeof user.email === "string" ? user.email.toLowerCase().trim() : "";
+        if (!email) return token;
+        const coach = await coachRepository.findOrCreateByEmail(email);
+        token.sub = coach.id;
+        return token;
+      }
       if (user?.id) token.sub = user.id;
       return token;
     },

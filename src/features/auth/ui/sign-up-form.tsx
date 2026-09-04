@@ -15,7 +15,9 @@ import {
 import { FieldError } from "@/components/ui/field-error";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import { signUpCoach } from "../application/actions";
+import { ContinueWithOAuth } from "./continue-with-oauth";
 
 export const SignUpForm = () => {
   const t = useTranslations("Auth");
@@ -28,7 +30,16 @@ export const SignUpForm = () => {
           <CardTitle>{t("signUpTitle")}</CardTitle>
           <CardDescription>{t("signUpDescription")}</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex flex-col gap-4">
+          <ContinueWithOAuth />
+          <div className="relative">
+            <Separator />
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="bg-card px-2 text-xs text-muted-foreground">
+                {t("or")}
+              </span>
+            </span>
+          </div>
           <form action={action} className="flex flex-col gap-4" noValidate>
             <div className="flex flex-col gap-1.5">
               <Label htmlFor="email">{t("email")}</Label>
