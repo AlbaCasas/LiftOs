@@ -1,8 +1,10 @@
-import { postgresAthleteRepository } from "../infrastructure/postgres-athletes";
+import { requireCoachId } from "@/features/auth/application/require-coach";
+import { athleteRepository } from "../infrastructure/postgres-athletes";
 
 export const getAthlete = async (
   id: string,
-  repository = postgresAthleteRepository,
+  repository = athleteRepository,
 ) => {
-  return await repository.findById(id);
+  const coachId = await requireCoachId();
+  return await repository.findById(id, coachId);
 };

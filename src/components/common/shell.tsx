@@ -1,14 +1,16 @@
 "use client";
 
-import { Users } from "lucide-react";
+import { LogOut, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
+import { Button } from "@/components/ui/button";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarHeader,
@@ -19,6 +21,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { signOutCoach } from "@/features/auth/application/actions";
 
 export function Shell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -49,6 +52,18 @@ export function Shell({ children }: { children: ReactNode }) {
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
+        <SidebarFooter className="p-3">
+          <form action={signOutCoach}>
+            <Button
+              type="submit"
+              variant="ghost"
+              className="w-full justify-start"
+            >
+              <LogOut />
+              {t("Auth.signOut")}
+            </Button>
+          </form>
+        </SidebarFooter>
       </Sidebar>
       <SidebarInset>
         <header className="flex h-12 items-center border-b px-4">

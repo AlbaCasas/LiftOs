@@ -1,3 +1,4 @@
+import { users } from "@/features/auth/infrastructure/schema";
 import { integer, pgTable, text } from "drizzle-orm/pg-core";
 
 export const athletes = pgTable("athletes", {
@@ -9,4 +10,7 @@ export const athletes = pgTable("athletes", {
   squat1rm: integer("squat_1rm").notNull(),
   bench1rm: integer("bench_1rm").notNull(),
   deadlift1rm: integer("deadlift_1rm").notNull(),
+  coachId: text("coach_id")
+    .references(() => users.id)
+    .notNull(),
 });

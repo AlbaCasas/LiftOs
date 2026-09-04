@@ -7,9 +7,14 @@ import {
 } from "./athlete";
 
 const kg = z
-  .number({ error: "required" })
-  .int({ error: "notPositive" })
-  .min(1, { error: "notPositive" });
+  .string()
+  .min(1, { error: "required" })
+  .pipe(
+    z.coerce
+      .number<string>({ error: "notPositive" })
+      .int({ error: "notPositive" })
+      .min(1, { error: "notPositive" }),
+  );
 
 const weightClassError = (issue: { input: unknown }) =>
   issue.input === "" ? "required" : "weightClassMismatch";

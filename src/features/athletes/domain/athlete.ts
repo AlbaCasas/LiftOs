@@ -55,26 +55,18 @@ type AthleteClass =
   | { gender: "male"; weightClass: MaleWeightClass };
 
 export type NewAthlete = AthleteStats & AthleteClass;
-export type Athlete = NewAthlete & { id: string };
+export type Athlete = NewAthlete & { id: string; coachId: string };
 
-export type NewAthleteDraft = {
-  name: string;
-  gender: string;
-  ageCategory: string;
-  weightClass: string;
-  squat1rm: number;
-  bench1rm: number;
-  deadlift1rm: number;
-};
+export type NewAthleteDraft = Record<AthleteField, string>;
 
 export const emptyAthleteDraft: NewAthleteDraft = {
   name: "",
   gender: "",
   ageCategory: "",
   weightClass: "",
-  squat1rm: Number.NaN,
-  bench1rm: Number.NaN,
-  deadlift1rm: Number.NaN,
+  squat1rm: "",
+  bench1rm: "",
+  deadlift1rm: "",
 };
 
 export const weightClassesFor = (gender: Gender) =>

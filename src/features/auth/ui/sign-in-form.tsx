@@ -1,0 +1,68 @@
+"use client";
+
+import { useActionState } from "react";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { FieldError } from "@/components/ui/field-error";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { signInCoach } from "../application/actions";
+
+export const SignInForm = () => {
+  const t = useTranslations("Auth");
+  const [state, action, pending] = useActionState(signInCoach, undefined);
+
+  return (
+    <div className="flex min-h-svh items-center justify-center p-6">
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle>{t("signInTitle")}</CardTitle>
+          <CardDescription>{t("signInDescription")}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form action={action} className="flex flex-col gap-4" noValidate>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="email">{t("email")}</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                autoFocus
+                required
+              />
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <Label htmlFor="password">{t("password")}</Label>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                required
+              />
+            </div>
+            {state?.message ? <FieldError>{state.message}</FieldError> : null}
+            <Button type="submit" size="lg" className="w-full" disabled={pending}>
+              {pending ? t("submitting") : t("submitSignIn")}
+            </Button>
+            <p className="text-center text-sm text-muted-foreground">
+              <Link href="/sign-up" className="underline-offset-4 hover:underline">
+                {t("toSignUp")}
+              </Link>
+            </p>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};
