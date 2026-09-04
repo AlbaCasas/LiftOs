@@ -23,6 +23,8 @@
     "failed": "Could not continue. Try again.",
     "toSignUp": "No account? Create one",
     "toSignIn": "Already have an account? Sign in",
+    "or": "or",
+    "continueWithGoogle": "Continue with Google",
     "signUpTitle": "Create account",
     "signUpDescription": "One account per coach. Athletes stay on yours only.",
     "signOut": "Sign out"
