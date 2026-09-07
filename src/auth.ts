@@ -1,9 +1,19 @@
 import NextAuth from "next-auth";
+import type { Account, Profile } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import Google from "next-auth/providers/google";
+import type { OAuthProviderId } from "next-auth/providers";
+import Google, { type GoogleProfile } from "next-auth/providers/google";
 
 import { verifyPassword } from "@/features/auth/infrastructure/password";
 import { coachRepository } from "@/features/auth/infrastructure/postgres-coaches";
+
+const google = "google" satisfies OAuthProviderId;
+
+const isGoogleProfile = (
+  account: Account | null | undefined,
+  profile?: Profile,
+): profile is GoogleProfile =>
+  account?.provider === google && profile != null;
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
@@ -39,16 +49,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    signIn({ account, user }) {
-      if (account?.provider === "google") return Boolean(user.email);
+    signIn({ account, profile }) {
+      if (isGoogleProfile(account, profile)) {
+        return Boolean(profile.email_verified && profile.email);
+      }
       return true;
     },
-    async jwt({ token, user, account }) {
-      if (account?.provider === "google") {
-        const email =
-          typeof user.email === "string" ? user.email.toLowerCase().trim() : "";
-        if (!email) return token;
-        const coach = await coachRepository.findOrCreateByEmail(email);
+    async jwt({ token, user, account, profile }) {
+      if (isGoogleProfile(account, profile)) {
+        const coach = await coachRepository.findOrCreateByEmail(
+          profile.email.toLowerCase().trim(),
+        );
         token.sub = coach.id;
         return token;
       }
