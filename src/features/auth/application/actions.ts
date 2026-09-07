@@ -7,11 +7,9 @@ import { signIn, signOut } from "@/auth";
 import { hashPassword } from "../infrastructure/password";
 import { coachRepository } from "../infrastructure/postgres-coaches";
 
-const emailAndPassword = (credentials: FormData) => ({
-  email: String(credentials.get("email") ?? "")
-    .toLowerCase()
-    .trim(),
-  password: String(credentials.get("password") ?? ""),
+const credentialsFrom = (formData: FormData) => ({
+  email: String(formData.get("email")).toLowerCase().trim(),
+  password: String(formData.get("password")),
 });
 
 export const signInCoach = async (
@@ -19,7 +17,7 @@ export const signInCoach = async (
   signinData: FormData,
 ) => {
   const t = await getTranslations("Auth");
-  const { email, password } = emailAndPassword(signinData);
+  const { email, password } = credentialsFrom(signinData);
   if (!email || !password) return { message: t("invalid") };
 
   try {
@@ -39,7 +37,7 @@ export const signUpCoach = async (
   signupData: FormData,
 ) => {
   const t = await getTranslations("Auth");
-  const { email, password } = emailAndPassword(signupData);
+  const { email, password } = credentialsFrom(signupData);
   if (!email || !password) return { message: t("invalid") };
   if (password.length < 8) return { message: t("passwordHint") };
 
@@ -71,4 +69,8 @@ export const signUpCoach = async (
 
 export const signOutCoach = async () => {
   await signOut({ redirectTo: "/sign-in" });
+};
+
+export const signInWithGoogle = async () => {
+  await signIn("google", { redirectTo: "/athletes" });
 };

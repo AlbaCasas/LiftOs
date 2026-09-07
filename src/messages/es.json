@@ -23,6 +23,8 @@
     "failed": "No se ha podido continuar. Inténtalo de nuevo.",
     "toSignUp": "¿No tienes cuenta? Crear una",
     "toSignIn": "¿Ya tienes cuenta? Entrar",
+    "or": "o",
+    "continueWithGoogle": "Continuar con Google",
     "signUpTitle": "Crear cuenta",
     "signUpDescription": "Una cuenta por coach. Los atletas quedan solo en la tuya.",
     "signOut": "Salir"

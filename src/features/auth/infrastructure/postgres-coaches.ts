@@ -12,4 +12,9 @@ export const coachRepository = {
     await db.insert(users).values(coach);
     return coach;
   },
+  async findOrCreateByEmail(email: string) {
+    const existing = await this.findByEmail(email);
+    if (existing) return existing;
+    return this.create({ id: crypto.randomUUID(), email });
+  },
 };
