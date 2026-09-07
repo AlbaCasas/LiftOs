@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOut, Users } from "lucide-react";
+import { Dumbbell, LogOut, Users } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -45,6 +45,17 @@ export function Shell({ children }: { children: ReactNode }) {
                     <Link href="/athletes" prefetch={false}>
                       <Users />
                       <span>{t("Nav.athletes")}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton
+                    asChild
+                    isActive={pathname.startsWith("/exercises")}
+                  >
+                    <Link href="/exercises" prefetch={false}>
+                      <Dumbbell />
+                      <span>{t("Nav.exercises")}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

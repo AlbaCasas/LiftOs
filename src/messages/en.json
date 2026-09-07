@@ -7,7 +7,8 @@
     "appName": "LiftOS"
   },
   "Nav": {
-    "athletes": "Athletes"
+    "athletes": "Athletes",
+    "exercises": "Exercises"
   },
   "Auth": {
     "signInTitle": "Sign in",
@@ -83,6 +84,48 @@
       "bench1rm": "Bench 1RM",
       "deadlift1rm": "Deadlift 1RM",
       "totalKg": "Total Kg"
+    }
+  },
+  "Exercises": {
+    "pageTitle": "Exercises",
+    "edit": "Edit",
+    "patternValue": {
+      "squat": "Squat",
+      "bench": "Bench",
+      "deadlift": "Deadlift",
+      "other": "Other"
+    },
+    "patternShort": {
+      "squat": "SQ",
+      "bench": "BP",
+      "deadlift": "DL",
+      "other": "Other"
+    },
+    "meetLiftValue": {
+      "true": "Yes",
+      "false": "No"
+    },
+    "form": {
+      "description": "Name, pattern, and whether it is a meet lift.",
+      "save": "Save",
+      "saving": "Saving…",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "deleting": "Deleting…",
+      "failed": "Could not save. Try again.",
+      "errors": {
+        "required": "Required"
+      }
+    },
+    "empty": {
+      "title": "No exercises",
+      "description": "The library is empty."
+    },
+    "table": {
+      "name": "Name",
+      "pattern": "Pattern",
+      "meetLift": "Meet lift",
+      "count": "{count, plural, one {# exercise} other {# exercises}}"
     }
   }
 }
