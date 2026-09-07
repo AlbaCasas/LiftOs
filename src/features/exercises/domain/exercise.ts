@@ -14,3 +14,15 @@ export type ExerciseDraft = {
   pattern: Pattern;
   isMeetLift: "true" | "false";
 };
+
+export type NewExerciseDraft = {
+  name: string;
+  pattern: Pattern;
+  isMeetLift: boolean;
+};
+
+export const emptyNewExerciseDraft: NewExerciseDraft = {
+  name: "",
+  pattern: "squat",
+  isMeetLift: false,
+};
