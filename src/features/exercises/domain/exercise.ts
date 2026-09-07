@@ -14,9 +14,3 @@ export type ExerciseDraft = {
   pattern: Pattern;
   isMeetLift: "true" | "false";
 };
-
-const includes = (list: readonly string[], value: string) =>
-  list.includes(value);
-
-export const isPattern = (value: string): value is Pattern =>
-  includes(patterns, value);

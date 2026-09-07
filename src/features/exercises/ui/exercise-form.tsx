@@ -80,9 +80,9 @@ export const ExerciseForm = ({
             </span>
           </Label>
           <Input id="name" {...register("name")} autoFocus />
-          {errors.name?.message ? (
+          {errors.name?.message && (
             <FieldError id="name-error">{t("form.errors.required")}</FieldError>
-          ) : null}
+          )}
         </div>
 
         <div className="flex flex-col gap-1.5">
@@ -102,7 +102,7 @@ export const ExerciseForm = ({
           </NativeSelect>
         </div>
 
-        {pattern !== "other" ? (
+        {pattern !== "other" && (
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="isMeetLift">{t("table.meetLift")}</Label>
             <NativeSelect id="isMeetLift" {...register("isMeetLift")}>
@@ -110,11 +110,11 @@ export const ExerciseForm = ({
               <option value="true">{t("meetLiftValue.true")}</option>
             </NativeSelect>
           </div>
-        ) : null}
+        )}
 
-        {errors.root?.message ? (
+        {errors.root?.message && (
           <FieldError className="text-sm">{errors.root.message}</FieldError>
-        ) : null}
+        )}
       </div>
 
       <DialogFooter className="sm:justify-between">
