@@ -67,7 +67,11 @@ export const SignInForm = () => {
               {pending ? t("submitting") : t("submitSignIn")}
             </Button>
             <p className="text-center text-sm text-muted-foreground">
-              <Link href="/sign-up" className="underline-offset-4 hover:underline">
+              <Link
+                href="/sign-up"
+                prefetch={false}
+                className="underline-offset-4 hover:underline"
+              >
                 {t("toSignUp")}
               </Link>
             </p>
