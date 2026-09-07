@@ -82,7 +82,7 @@ export const AthleteDetails = ({ athlete }: { athlete: Athlete }) => {
   return (
     <div className="mx-auto max-w-3xl">
       <Button variant="ghost" size="sm" className="-ml-2 mb-4" asChild>
-        <Link href="/athletes">
+        <Link href="/athletes" prefetch={false}>
           <ArrowLeft />
           {t("backToList")}
         </Link>

@@ -42,7 +42,7 @@ export function Shell({ children }: { children: ReactNode }) {
                     asChild
                     isActive={pathname.startsWith("/athletes")}
                   >
-                    <Link href="/athletes">
+                    <Link href="/athletes" prefetch={false}>
                       <Users />
                       <span>{t("Nav.athletes")}</span>
                     </Link>

@@ -73,6 +73,7 @@ const AthleteTableRow = ({ athlete }: { athlete: AthleteWithAvatar }) => {
       <TableCell className="py-3 pl-4">
         <Link
           href={`/athletes/${athlete.id}`}
+          prefetch={false}
           className="flex items-center gap-3 after:absolute after:inset-0"
         >
           <AthleteAvatar {...athlete.avatar} />
