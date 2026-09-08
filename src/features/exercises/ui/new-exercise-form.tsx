@@ -16,10 +16,17 @@ import {
   emptyNewExerciseDraft,
   patterns,
   type NewExerciseDraft,
+  type Pattern,
 } from "../domain/exercise";
 import { newExerciseDraftSchema } from "../domain/to-new-exercise";
 
-export const NewExerciseForm = ({ onSuccess }: { onSuccess: () => void }) => {
+export const NewExerciseForm = ({
+  defaultPattern,
+  onSuccess,
+}: {
+  defaultPattern: Pattern;
+  onSuccess: () => void;
+}) => {
   const t = useTranslations("Exercises");
   const [isPending, startTransition] = useTransition();
   const {
@@ -30,7 +37,10 @@ export const NewExerciseForm = ({ onSuccess }: { onSuccess: () => void }) => {
     formState: { errors },
   } = useForm<NewExerciseDraft>({
     resolver: zodResolver(newExerciseDraftSchema, undefined, { raw: true }),
-    defaultValues: emptyNewExerciseDraft,
+    defaultValues: {
+      ...emptyNewExerciseDraft,
+      pattern: defaultPattern,
+    },
   });
 
   const pattern = useWatch({ control, name: "pattern" });
@@ -53,7 +63,6 @@ export const NewExerciseForm = ({ onSuccess }: { onSuccess: () => void }) => {
           <Label htmlFor="name">
             {t("table.name")}
             <span className="text-destructive" aria-hidden="true">
-              {" "}
               *
             </span>
           </Label>

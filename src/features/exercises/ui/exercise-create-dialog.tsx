@@ -12,9 +12,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import type { Pattern } from "../domain/exercise";
 import { NewExerciseForm } from "./new-exercise-form";
 
-export const ExerciseCreateDialog = () => {
+export const ExerciseCreateDialog = ({
+  defaultPattern,
+}: {
+  defaultPattern: Pattern;
+}) => {
   const [open, setOpen] = useState(false);
   const t = useTranslations("Exercises");
 
@@ -31,7 +36,8 @@ export const ExerciseCreateDialog = () => {
           </DialogDescription>
         </DialogHeader>
         <NewExerciseForm
-          key={open ? "open" : "closed"}
+          key={open ? defaultPattern : "closed"}
+          defaultPattern={defaultPattern}
           onSuccess={() => setOpen(false)}
         />
       </DialogContent>
