@@ -1,0 +1,88 @@
+import { useTranslations } from "next-intl";
+
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import type { Exercise } from "../domain/exercise";
+import { ExerciseDialog } from "./exercise-dialog";
+
+const EmptyLibrary = () => {
+  const t = useTranslations("Exercises");
+
+  return (
+    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed bg-card px-6 py-16 text-center">
+      <p className="font-medium">{t("empty.title")}</p>
+      <p className="mt-1 text-sm text-muted-foreground">
+        {t("empty.description")}
+      </p>
+    </div>
+  );
+};
+
+const ExerciseTableRow = ({ exercise }: { exercise: Exercise }) => {
+  const t = useTranslations("Exercises");
+
+  return (
+    <TableRow className="group">
+      <TableCell className="py-3 pl-4 font-medium">{exercise.name}</TableCell>
+      <TableCell className="py-3 text-muted-foreground">
+        {t(`patternShort.${exercise.pattern}`)}
+      </TableCell>
+      <TableCell className="py-3">
+        {exercise.isMeetLift && exercise.pattern !== "other" ? (
+          <Badge variant="outline">{t("table.meetLift")}</Badge>
+        ) : null}
+      </TableCell>
+      <TableCell className="py-3 pr-4 text-right">
+        <ExerciseDialog exercise={exercise} />
+      </TableCell>
+    </TableRow>
+  );
+};
+
+export const ExercisesTable = ({
+  exercises,
+}: {
+  exercises: Exercise[];
+}) => {
+  const t = useTranslations("Exercises");
+
+  if (exercises.length === 0) return <EmptyLibrary />;
+
+  return (
+    <div className="overflow-hidden rounded-xl border bg-card">
+      <Table>
+        <TableHeader>
+          <TableRow className="hover:bg-transparent">
+            <TableHead className="pl-4 text-muted-foreground">
+              {t("table.name")}
+            </TableHead>
+            <TableHead className="text-muted-foreground">
+              {t("table.pattern")}
+            </TableHead>
+            <TableHead className="text-muted-foreground">
+              {t("table.meetLift")}
+            </TableHead>
+            <TableHead className="pr-4">
+              <span className="sr-only">{t("edit")}</span>
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {exercises.map((exercise) => (
+            <ExerciseTableRow key={exercise.id} exercise={exercise} />
+          ))}
+        </TableBody>
+      </Table>
+      <p className="border-t px-4 py-2.5 text-xs text-muted-foreground">
+        {t("table.count", { count: exercises.length })}
+      </p>
+    </div>
+  );
+};

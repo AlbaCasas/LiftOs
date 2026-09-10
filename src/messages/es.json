@@ -7,7 +7,8 @@
     "appName": "LiftOS"
   },
   "Nav": {
-    "athletes": "Atletas"
+    "athletes": "Atletas",
+    "exercises": "Ejercicios"
   },
   "Auth": {
     "signInTitle": "Entrar",
@@ -83,6 +84,48 @@
       "bench1rm": "Banca 1RM",
       "deadlift1rm": "Peso muerto 1RM",
       "totalKg": "Total Kg"
+    }
+  },
+  "Exercises": {
+    "pageTitle": "Ejercicios",
+    "edit": "Editar",
+    "patternValue": {
+      "squat": "Sentadilla",
+      "bench": "Banca",
+      "deadlift": "Peso muerto",
+      "other": "Otro"
+    },
+    "patternShort": {
+      "squat": "SQ",
+      "bench": "BP",
+      "deadlift": "DL",
+      "other": "Otro"
+    },
+    "meetLiftValue": {
+      "true": "Sí",
+      "false": "No"
+    },
+    "form": {
+      "description": "Nombre, patrón y si es lift de competición.",
+      "save": "Guardar",
+      "saving": "Guardando…",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "deleting": "Eliminando…",
+      "failed": "No se ha podido guardar. Inténtalo de nuevo.",
+      "errors": {
+        "required": "Obligatorio"
+      }
+    },
+    "empty": {
+      "title": "No hay ejercicios",
+      "description": "El catálogo está vacío."
+    },
+    "table": {
+      "name": "Nombre",
+      "pattern": "Patrón",
+      "meetLift": "Lift de competición",
+      "count": "{count, plural, one {# ejercicio} other {# ejercicios}}"
     }
   }
 }

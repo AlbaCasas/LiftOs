@@ -4,6 +4,7 @@ import "server-only";
 
 import * as athleteSchema from "@/features/athletes/infrastructure/schema";
 import * as authSchema from "@/features/auth/infrastructure/schema";
+import * as exerciseSchema from "@/features/exercises/infrastructure/schema";
 
 const databaseUrl = process.env.DATABASE_URL;
 
@@ -12,5 +13,5 @@ if (!databaseUrl) {
 }
 
 export const db = drizzle(neon(databaseUrl), {
-  schema: { ...athleteSchema, ...authSchema },
+  schema: { ...athleteSchema, ...authSchema, ...exerciseSchema },
 });
