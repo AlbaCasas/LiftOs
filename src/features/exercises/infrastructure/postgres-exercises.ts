@@ -22,6 +22,10 @@ export const exerciseRepository: ExerciseRepository = {
     if (existing) return;
     await db.insert(exercises).values(defaults);
   },
+  async create(exercise) {
+    await db.insert(exercises).values(exercise);
+    return exercise;
+  },
   async update(exercise) {
     await db
       .update(exercises)

@@ -81,13 +81,26 @@ export const isGender = (value: string): value is Gender =>
 export const isAgeCategory = (value: string): value is AgeCategory =>
   includes(ageCategories, value);
 
-export const isFemaleWeightClass = (value: string): value is FemaleWeightClass =>
-  includes(femaleWeightClasses, value);
+export const isFemaleWeightClass = (
+  value: string,
+): value is FemaleWeightClass => includes(femaleWeightClasses, value);
 
 export const isMaleWeightClass = (value: string): value is MaleWeightClass =>
   includes(maleWeightClasses, value);
 
 export const isWeightClassFor = (gender: Gender, value: string) =>
-  gender === "female"
-    ? isFemaleWeightClass(value)
-    : isMaleWeightClass(value);
+  gender === "female" ? isFemaleWeightClass(value) : isMaleWeightClass(value);
+
+export const searchAthletes = <T extends Pick<Athlete, "name">>(
+  athletes: T[],
+  query: string,
+) => {
+  const cleanedQuery = query.trim().toLowerCase();
+  if (!cleanedQuery) {
+    return athletes;
+  }
+
+  return athletes.filter((athlete) =>
+    athlete.name.toLowerCase().includes(cleanedQuery),
+  );
+};
