@@ -12,32 +12,42 @@ import {
 import type { Exercise } from "../domain/exercise";
 import { ExerciseDialog } from "./exercise-dialog";
 
-const EmptyLibrary = () => {
+const EmptyLibrary = ({ isSearch }: { isSearch: boolean }) => {
   const t = useTranslations("Exercises");
 
   return (
     <div className="flex flex-col items-center justify-center rounded-xl border border-dashed bg-card px-6 py-16 text-center">
-      <p className="font-medium">{t("empty.title")}</p>
+      <p className="font-medium">
+        {isSearch ? t("empty.searchTitle") : t("empty.title")}
+      </p>
       <p className="mt-1 text-sm text-muted-foreground">
-        {t("empty.description")}
+        {isSearch ? t("empty.searchDescription") : t("empty.description")}
       </p>
     </div>
   );
 };
 
-const ExerciseTableRow = ({ exercise }: { exercise: Exercise }) => {
+const ExerciseTableRow = ({
+  exercise,
+  showPattern,
+}: {
+  exercise: Exercise;
+  showPattern: boolean;
+}) => {
   const t = useTranslations("Exercises");
 
   return (
     <TableRow className="group">
       <TableCell className="py-3 pl-4 font-medium">{exercise.name}</TableCell>
-      <TableCell className="py-3 text-muted-foreground">
-        {t(`patternShort.${exercise.pattern}`)}
-      </TableCell>
+      {showPattern && (
+        <TableCell className="py-3 text-muted-foreground">
+          {t(`patternShort.${exercise.pattern}`)}
+        </TableCell>
+      )}
       <TableCell className="py-3">
-        {exercise.isMeetLift && exercise.pattern !== "other" ? (
+        {exercise.isMeetLift && exercise.pattern !== "other" && (
           <Badge variant="outline">{t("table.meetLift")}</Badge>
-        ) : null}
+        )}
       </TableCell>
       <TableCell className="py-3 pr-4 text-right">
         <ExerciseDialog exercise={exercise} />
@@ -48,12 +58,16 @@ const ExerciseTableRow = ({ exercise }: { exercise: Exercise }) => {
 
 export const ExercisesTable = ({
   exercises,
+  showPattern = true,
+  isSearch = false,
 }: {
   exercises: Exercise[];
+  showPattern?: boolean;
+  isSearch?: boolean;
 }) => {
   const t = useTranslations("Exercises");
 
-  if (exercises.length === 0) return <EmptyLibrary />;
+  if (exercises.length === 0) return <EmptyLibrary isSearch={isSearch} />;
 
   return (
     <div className="overflow-hidden rounded-xl border bg-card">
@@ -63,9 +77,11 @@ export const ExercisesTable = ({
             <TableHead className="pl-4 text-muted-foreground">
               {t("table.name")}
             </TableHead>
-            <TableHead className="text-muted-foreground">
-              {t("table.pattern")}
-            </TableHead>
+            {showPattern && (
+              <TableHead className="text-muted-foreground">
+                {t("table.pattern")}
+              </TableHead>
+            )}
             <TableHead className="text-muted-foreground">
               {t("table.meetLift")}
             </TableHead>
@@ -76,7 +92,11 @@ export const ExercisesTable = ({
         </TableHeader>
         <TableBody>
           {exercises.map((exercise) => (
-            <ExerciseTableRow key={exercise.id} exercise={exercise} />
+            <ExerciseTableRow
+              key={exercise.id}
+              exercise={exercise}
+              showPattern={showPattern}
+            />
           ))}
         </TableBody>
       </Table>

@@ -38,6 +38,12 @@
     "addAthlete": "Add athlete",
     "backToList": "Athletes",
     "kg": "kg",
+    "search": {
+      "placeholder": "Search athlete",
+      "title": "Search athletes",
+      "description": "Find an athlete by name.",
+      "empty": "No athletes found."
+    },
     "genderValue": {
       "female": "Female",
       "male": "Male"
@@ -67,7 +73,9 @@
     },
     "empty": {
       "title": "No athletes",
-      "description": "Add the first one to see the roster."
+      "description": "Add the first one to see the roster.",
+      "searchTitle": "No matching athletes",
+      "searchDescription": "Try another name, or clear search with ⌘K."
     },
     "table": {
       "name": "Name",
@@ -90,6 +98,15 @@
     "pageTitle": "Exercises",
     "addExercise": "+ New",
     "edit": "Edit",
+    "search": {
+      "placeholder": "Search exercise",
+      "title": "Search exercises",
+      "description": "Find an exercise by name.",
+      "empty": "No exercises found."
+    },
+    "tabs": {
+      "all": "All"
+    },
     "patternValue": {
       "squat": "Squat",
       "bench": "Bench",
@@ -125,7 +142,9 @@
     },
     "empty": {
       "title": "No exercises",
-      "description": "The library is empty."
+      "description": "The library is empty.",
+      "searchTitle": "No matching exercises",
+      "searchDescription": "Try another name, or clear search with ⌘K."
     },
     "table": {
       "name": "Name",

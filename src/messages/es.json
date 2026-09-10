@@ -38,6 +38,12 @@
     "addAthlete": "Añadir atleta",
     "backToList": "Atletas",
     "kg": "kg",
+    "search": {
+      "placeholder": "Buscar atleta",
+      "title": "Buscar atletas",
+      "description": "Encuentra un atleta por nombre.",
+      "empty": "No hay atletas."
+    },
     "genderValue": {
       "female": "Mujer",
       "male": "Hombre"
@@ -67,7 +73,9 @@
     },
     "empty": {
       "title": "No hay atletas",
-      "description": "Añade el primero para ver el roster."
+      "description": "Añade el primero para ver el roster.",
+      "searchTitle": "Ningún atleta coincide",
+      "searchDescription": "Prueba otro nombre, o borra la búsqueda con ⌘K."
     },
     "table": {
       "name": "Nombre",
@@ -90,6 +98,15 @@
     "pageTitle": "Ejercicios",
     "addExercise": "+ Nuevo",
     "edit": "Editar",
+    "search": {
+      "placeholder": "Buscar ejercicio",
+      "title": "Buscar ejercicios",
+      "description": "Encuentra un ejercicio por nombre.",
+      "empty": "No hay ejercicios."
+    },
+    "tabs": {
+      "all": "Todos"
+    },
     "patternValue": {
       "squat": "Sentadilla",
       "bench": "Banca",
@@ -125,7 +142,9 @@
     },
     "empty": {
       "title": "No hay ejercicios",
-      "description": "El catálogo está vacío."
+      "description": "El catálogo está vacío.",
+      "searchTitle": "Ningún ejercicio coincide",
+      "searchDescription": "Prueba otro nombre, o borra la búsqueda con ⌘K."
     },
     "table": {
       "name": "Nombre",

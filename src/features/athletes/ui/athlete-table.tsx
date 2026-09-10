@@ -35,14 +35,16 @@ const liftColumns = [
   { key: "total", getValue: totalKg, emphasized: true },
 ] as const;
 
-const EmptyRoster = () => {
+const EmptyList = ({ isSearch }: { isSearch: boolean }) => {
   const t = useTranslations("Athletes");
 
   return (
     <div className="flex flex-col items-center justify-center rounded-xl border border-dashed bg-card px-6 py-16 text-center">
-      <p className="font-medium">{t("empty.title")}</p>
+      <p className="font-medium">
+        {isSearch ? t("empty.searchTitle") : t("empty.title")}
+      </p>
       <p className="mt-1 text-sm text-muted-foreground">
-        {t("empty.description")}
+        {isSearch ? t("empty.searchDescription") : t("empty.description")}
       </p>
     </div>
   );
@@ -102,12 +104,14 @@ const AthleteTableRow = ({ athlete }: { athlete: AthleteWithAvatar }) => {
 
 export const AthleteTable = ({
   athletes,
+  isSearch = false,
 }: {
   athletes: AthleteWithAvatar[];
+  isSearch?: boolean;
 }) => {
   const t = useTranslations("Athletes");
 
-  if (athletes.length === 0) return <EmptyRoster />;
+  if (athletes.length === 0) return <EmptyList isSearch={isSearch} />;
 
   return (
     <div className="overflow-hidden rounded-xl border bg-card">
