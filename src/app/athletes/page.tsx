@@ -15,7 +15,10 @@ export default async function AthletesPage() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between gap-3">
-        <h1 className="text-2xl font-semibold tracking-tight">{t("pageTitle")}</h1>
+        <div className="flex items-baseline gap-2">
+          <h1 className="text-2xl font-semibold tracking-tight">{t("pageTitle")}</h1>
+          <span className="text-sm text-muted-foreground">{athletes.length}</span>
+        </div>
         <AthleteSheet />
       </div>
       <AthleteTable athletes={athletes} />

@@ -88,6 +88,7 @@
   },
   "Exercises": {
     "pageTitle": "Exercises",
+    "addExercise": "+ New",
     "edit": "Edit",
     "patternValue": {
       "squat": "Squat",
@@ -106,7 +107,12 @@
       "false": "No"
     },
     "form": {
+      "createTitle": "New exercise",
       "description": "Name, pattern, and whether it is a meet lift.",
+      "namePlaceholder": "e.g. Tempo squat",
+      "meetLiftHint": "Check only if this is the meet lift",
+      "create": "Create",
+      "creating": "Creating…",
       "save": "Save",
       "saving": "Saving…",
       "cancel": "Cancel",

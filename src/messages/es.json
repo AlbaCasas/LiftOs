@@ -88,6 +88,7 @@
   },
   "Exercises": {
     "pageTitle": "Ejercicios",
+    "addExercise": "+ Nuevo",
     "edit": "Editar",
     "patternValue": {
       "squat": "Sentadilla",
@@ -106,7 +107,12 @@
       "false": "No"
     },
     "form": {
+      "createTitle": "Nuevo ejercicio",
       "description": "Nombre, patrón y si es lift de competición.",
+      "namePlaceholder": "p. ej. Tempo squat",
+      "meetLiftHint": "Marca solo si es el lift de competición",
+      "create": "Crear",
+      "creating": "Creando…",
       "save": "Guardar",
       "saving": "Guardando…",
       "cancel": "Cancelar",
