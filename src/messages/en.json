@@ -8,7 +8,8 @@
   },
   "Nav": {
     "athletes": "Athletes",
-    "exercises": "Exercises"
+    "exercises": "Exercises",
+    "blocks": "Blocks"
   },
   "Auth": {
     "signInTitle": "Sign in",
@@ -151,6 +152,40 @@
       "pattern": "Pattern",
       "meetLift": "Meet lift",
       "count": "{count, plural, one {# exercise} other {# exercises}}"
+    }
+  },
+  "Blocks": {
+    "pageTitle": "Blocks",
+    "addBlock": "+ New",
+    "backToList": "Blocks",
+    "unassigned": "Unassigned",
+    "form": {
+      "createTitle": "New block",
+      "description": "Athlete and name. Put the duration in the name.",
+      "select": "Select",
+      "noAthletes": "Add an athlete first",
+      "namePlaceholder": "e.g. 8 weeks — hypertrophy",
+      "create": "Create",
+      "creating": "Creating…",
+      "cancel": "Cancel",
+      "failed": "Could not save. Try again.",
+      "errors": {
+        "required": "Required"
+      }
+    },
+    "empty": {
+      "title": "No blocks",
+      "description": "Create the first one to start a program."
+    },
+    "table": {
+      "name": "Name",
+      "athlete": "Athlete",
+      "updated": "Updated",
+      "count": "{count, plural, one {# block} other {# blocks}}"
+    },
+    "editor": {
+      "emptyTitle": "No weeks yet",
+      "emptyDescription": "Weeks and days will go here."
     }
   }
 }

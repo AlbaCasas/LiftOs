@@ -30,6 +30,10 @@ Quick actions in chat (Semrush / Grammarly): “Add a squat week”, “Deload w
 
 LiftOS: barbell only. No video catalog. Picker is a sheet/dialog over the grid.
 
+### Blocks list
+
+Name | Athlete | Updated. The whole row opens the block. Create is a dialog: **athlete required**, then name (duration in the name). Stays on the list after create. No weeks on create. Unassigned / template later ([ACZ-34](https://linear.app/acz-dev/issue/ACZ-34)).
+
 ### Free cap → pay
 
 [Sana AI](https://mobbin.com/screens/7e164f55-0807-4fb9-957e-324eb42cd9ea): always-visible “N messages left this month. Upgrade”. [Air](https://mobbin.com/screens/33662dd3-56c7-49c8-bc9d-b393f8133dac): modal on the workspace, not a new site. After pay, stay on the same block (Vercel “welcome to Pro” is optional, skippable).
