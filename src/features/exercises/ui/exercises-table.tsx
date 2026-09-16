@@ -42,11 +42,11 @@ const ExerciseTableRow = ({
   const [editOpen, setEditOpen] = useState(false);
 
   return (
-    <TableRow className="group relative isolate">
+    <TableRow className="group relative isolate cursor-pointer">
       <TableCell className="py-3 pl-4 font-medium">
         <button
           type="button"
-          className="bg-transparent p-0 text-left font-medium after:absolute after:inset-0 after:z-0"
+          className="cursor-pointer bg-transparent p-0 text-left font-medium after:absolute after:inset-0 after:z-0"
           onClick={() => setEditOpen(true)}
         >
           {exercise.name}
