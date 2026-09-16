@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
+import { Heading } from "@/components/ui/heading";
 import type { TrainingBlock } from "../domain/block";
 
 export const BlockEditorShell = ({ block }: { block: TrainingBlock }) => {
@@ -17,7 +18,7 @@ export const BlockEditorShell = ({ block }: { block: TrainingBlock }) => {
             {t("backToList")}
           </Link>
         </Button>
-        <h1 className="text-2xl font-semibold tracking-tight">{block.name}</h1>
+        <Heading>{block.name}</Heading>
       </div>
       <div className="flex flex-col items-center justify-center rounded-xl border border-dashed bg-card px-6 py-16 text-center">
         <p className="font-medium">{t("editor.emptyTitle")}</p>
