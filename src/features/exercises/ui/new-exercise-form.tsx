@@ -19,6 +19,7 @@ import {
   type Pattern,
 } from "../domain/exercise";
 import { newExerciseDraftSchema } from "../domain/to-new-exercise";
+import { MeetLiftField } from "./meet-lift-field";
 
 export const NewExerciseForm = ({
   defaultPattern,
@@ -33,10 +34,11 @@ export const NewExerciseForm = ({
     register,
     handleSubmit,
     control,
+    setValue,
     setError,
     formState: { errors },
   } = useForm<NewExerciseDraft>({
-    resolver: zodResolver(newExerciseDraftSchema, undefined, { raw: true }),
+    resolver: zodResolver(newExerciseDraftSchema),
     defaultValues: {
       ...emptyNewExerciseDraft,
       pattern: defaultPattern,
@@ -44,6 +46,7 @@ export const NewExerciseForm = ({
   });
 
   const pattern = useWatch({ control, name: "pattern" });
+  const isMeetLift = useWatch({ control, name: "isMeetLift" });
 
   const onSubmit = handleSubmit((draft) => {
     startTransition(async () => {
@@ -95,20 +98,10 @@ export const NewExerciseForm = ({
         </div>
 
         {pattern !== "other" ? (
-          <label htmlFor="isMeetLift" className="flex items-start gap-2">
-            <input
-              id="isMeetLift"
-              type="checkbox"
-              className="mt-1 size-4 rounded border border-input"
-              {...register("isMeetLift")}
-            />
-            <span className="flex flex-col gap-0.5">
-              <span className="font-medium">{t("table.meetLift")}</span>
-              <span className="text-sm text-muted-foreground">
-                {t("form.meetLiftHint")}
-              </span>
-            </span>
-          </label>
+          <MeetLiftField
+            checked={Boolean(isMeetLift)}
+            onCheckedChange={(checked) => setValue("isMeetLift", checked)}
+          />
         ) : null}
 
         {errors.root?.message ? (

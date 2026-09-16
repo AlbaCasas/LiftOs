@@ -15,9 +15,14 @@ import { ExerciseSearch } from "./exercise-search";
 import { ExercisesTable } from "./exercises-table";
 import { PatternTabs } from "./pattern-tabs";
 
-export const ExercisesLibrary = ({ exercises }: { exercises: Exercise[] }) => {
+export const ExercisesLibrary = ({
+  exercises,
+  patternFilter,
+}: {
+  exercises: Exercise[];
+  patternFilter: PatternFilter;
+}) => {
   const t = useTranslations("Exercises");
-  const [patternFilter, setPatternFilter] = useState<PatternFilter>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const patternExercises = filterExercises(exercises, patternFilter);
   const visibleExercises = searchExercises(patternExercises, searchQuery);
@@ -41,7 +46,7 @@ export const ExercisesLibrary = ({ exercises }: { exercises: Exercise[] }) => {
           <ExerciseCreateDialog defaultPattern={defaultPattern} />
         </div>
       </div>
-      <PatternTabs value={patternFilter} onChange={setPatternFilter} />
+      <PatternTabs value={patternFilter} />
       <ExercisesTable
         exercises={visibleExercises}
         showPattern={patternFilter === "all"}

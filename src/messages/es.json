@@ -20,6 +20,7 @@
     "submitSignUp": "Crear cuenta",
     "submitting": "Un momento…",
     "invalid": "Email o contraseña incorrectos",
+    "missingCredentials": "Email y contraseña son obligatorios",
     "emailTaken": "Ya existe una cuenta con este email",
     "passwordHint": "La contraseña debe tener al menos 8 caracteres",
     "failed": "No se ha podido continuar. Inténtalo de nuevo.",
@@ -99,6 +100,7 @@
     "pageTitle": "Ejercicios",
     "addExercise": "+ Nuevo",
     "edit": "Editar",
+    "delete": "Eliminar",
     "search": {
       "placeholder": "Buscar ejercicio",
       "title": "Buscar ejercicios",
@@ -120,15 +122,11 @@
       "deadlift": "DL",
       "other": "Otro"
     },
-    "meetLiftValue": {
-      "true": "Sí",
-      "false": "No"
-    },
     "form": {
       "createTitle": "Nuevo ejercicio",
       "description": "Nombre, patrón y si es lift de competición.",
       "namePlaceholder": "p. ej. Tempo squat",
-      "meetLiftHint": "Marca solo si es el lift de competición",
+      "meetLiftHint": "Actívalo solo si es el lift de competición",
       "create": "Crear",
       "creating": "Creando…",
       "save": "Guardar",
@@ -136,6 +134,8 @@
       "cancel": "Cancelar",
       "delete": "Eliminar",
       "deleting": "Eliminando…",
+      "confirmDeleteTitle": "¿Eliminar este ejercicio?",
+      "confirmDeleteDescription": "Esto no se puede deshacer.",
       "failed": "No se ha podido guardar. Inténtalo de nuevo.",
       "errors": {
         "required": "Obligatorio"
