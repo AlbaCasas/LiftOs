@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState, type FormEvent } from "react";
+import { useActionState, useState, type SubmitEvent } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
@@ -24,7 +24,7 @@ export const SignInForm = () => {
   const [state, action, pending] = useActionState(signInCoach, undefined);
   const [clientMessage, setClientMessage] = useState<string>();
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     const formData = new FormData(event.currentTarget);
     const email = String(formData.get("email") ?? "").trim();
     const password = String(formData.get("password") ?? "");
