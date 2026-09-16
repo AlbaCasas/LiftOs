@@ -21,9 +21,11 @@ import { newBlockDraftSchema } from "../domain/to-new-block";
 
 export const NewBlockForm = ({
   athletes,
+  lockedAthlete,
   onSuccess,
 }: {
   athletes: BlockAthleteOption[];
+  lockedAthlete?: BlockAthleteOption;
   onSuccess: () => void;
 }) => {
   const t = useTranslations("Blocks");
@@ -35,7 +37,10 @@ export const NewBlockForm = ({
     formState: { errors },
   } = useForm<NewBlockDraft>({
     resolver: zodResolver(newBlockDraftSchema),
-    defaultValues: emptyNewBlockDraft,
+    defaultValues: {
+      ...emptyNewBlockDraft,
+      athleteId: lockedAthlete?.id ?? emptyNewBlockDraft.athleteId,
+    },
   });
 
   const saveBlock = handleSubmit((draft) => {
@@ -54,34 +59,58 @@ export const NewBlockForm = ({
     void saveBlock(event);
   };
 
+  const canCreate = Boolean(lockedAthlete) || athletes.length > 0;
+
   return (
     <form onSubmit={onSubmit} noValidate className="flex flex-col gap-4">
       <div className="flex flex-col gap-1.5">
-        <Label htmlFor="athleteId">
+        <Label htmlFor={lockedAthlete ? "athleteName" : "athleteId"}>
           {t("table.athlete")}
           <span className="text-destructive" aria-hidden="true">
             *
           </span>
         </Label>
-        <NativeSelect
-          id="athleteId"
-          aria-invalid={Boolean(errors.athleteId)}
-          aria-describedby={errors.athleteId ? "athlete-error" : undefined}
-          autoFocus
-          {...register("athleteId")}
-        >
-          <option value="">
-            {athletes.length > 0 ? t("form.select") : t("form.noAthletes")}
-          </option>
-          {athletes.map((athlete) => (
-            <option key={athlete.id} value={athlete.id}>
-              {athlete.name}
-            </option>
-          ))}
-        </NativeSelect>
-        {errors.athleteId?.message ? (
-          <FieldError id="athlete-error">{t("form.errors.required")}</FieldError>
-        ) : null}
+        {lockedAthlete ? (
+          <>
+            <input type="hidden" {...register("athleteId")} />
+            <Input
+              id="athleteName"
+              disabled
+              value={lockedAthlete.name}
+              aria-describedby="athlete-locked-hint"
+            />
+            <p
+              id="athlete-locked-hint"
+              className="text-xs text-muted-foreground"
+            >
+              {t("form.athleteLockedHint")}
+            </p>
+          </>
+        ) : (
+          <>
+            <NativeSelect
+              id="athleteId"
+              aria-invalid={Boolean(errors.athleteId)}
+              aria-describedby={errors.athleteId ? "athlete-error" : undefined}
+              autoFocus
+              {...register("athleteId")}
+            >
+              <option value="">
+                {athletes.length > 0 ? t("form.select") : t("form.noAthletes")}
+              </option>
+              {athletes.map((athlete) => (
+                <option key={athlete.id} value={athlete.id}>
+                  {athlete.name}
+                </option>
+              ))}
+            </NativeSelect>
+            {errors.athleteId?.message ? (
+              <FieldError id="athlete-error">
+                {t("form.errors.required")}
+              </FieldError>
+            ) : null}
+          </>
+        )}
       </div>
 
       <div className="flex flex-col gap-1.5">
@@ -96,6 +125,7 @@ export const NewBlockForm = ({
           aria-invalid={Boolean(errors.name)}
           aria-describedby={errors.name ? "name-error" : undefined}
           placeholder={t("form.namePlaceholder")}
+          autoFocus={Boolean(lockedAthlete)}
           {...register("name")}
         />
         {errors.name?.message ? (
@@ -112,7 +142,7 @@ export const NewBlockForm = ({
             {t("form.cancel")}
           </Button>
         </DialogClose>
-        <Button type="submit" disabled={isPending || athletes.length === 0}>
+        <Button type="submit" disabled={isPending || !canCreate}>
           {isPending ? t("form.creating") : t("form.create")}
         </Button>
       </DialogFooter>

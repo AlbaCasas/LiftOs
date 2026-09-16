@@ -38,6 +38,8 @@
   "Athletes": {
     "pageTitle": "Atletas",
     "addAthlete": "Añadir atleta",
+    "edit": "Editar",
+    "newBlock": "Nuevo bloque",
     "backToList": "Atletas",
     "kg": "kg",
     "search": {
@@ -165,6 +167,7 @@
       "select": "Selecciona",
       "noAthletes": "Añade un atleta primero",
       "namePlaceholder": "p. ej. 8 semanas — hipertrofia",
+      "athleteLockedHint": "Para quién es este bloque",
       "create": "Crear",
       "creating": "Creando…",
       "cancel": "Cancelar",
