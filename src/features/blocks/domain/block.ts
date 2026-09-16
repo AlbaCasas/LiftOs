@@ -12,6 +12,11 @@ export type BlockAthleteOption = {
   name: string;
 };
 
+export const toBlockAthleteOption = ({
+  id,
+  name,
+}: BlockAthleteOption): BlockAthleteOption => ({ id, name });
+
 export type NewBlockDraft = {
   name: string;
   athleteId: string;
