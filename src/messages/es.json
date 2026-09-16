@@ -8,7 +8,8 @@
   },
   "Nav": {
     "athletes": "Atletas",
-    "exercises": "Ejercicios"
+    "exercises": "Ejercicios",
+    "blocks": "Bloques"
   },
   "Auth": {
     "signInTitle": "Entrar",
@@ -151,6 +152,40 @@
       "pattern": "Patrón",
       "meetLift": "Lift de competición",
       "count": "{count, plural, one {# ejercicio} other {# ejercicios}}"
+    }
+  },
+  "Blocks": {
+    "pageTitle": "Bloques",
+    "addBlock": "+ Nuevo",
+    "backToList": "Bloques",
+    "unassigned": "Sin atleta",
+    "form": {
+      "createTitle": "Nuevo bloque",
+      "description": "Atleta y nombre. La duración va en el nombre.",
+      "select": "Selecciona",
+      "noAthletes": "Añade un atleta primero",
+      "namePlaceholder": "p. ej. 8 semanas — hipertrofia",
+      "create": "Crear",
+      "creating": "Creando…",
+      "cancel": "Cancelar",
+      "failed": "No se ha podido guardar. Inténtalo de nuevo.",
+      "errors": {
+        "required": "Obligatorio"
+      }
+    },
+    "empty": {
+      "title": "No hay bloques",
+      "description": "Crea el primero para empezar un programa."
+    },
+    "table": {
+      "name": "Nombre",
+      "athlete": "Atleta",
+      "updated": "Actualizado",
+      "count": "{count, plural, one {# bloque} other {# bloques}}"
+    },
+    "editor": {
+      "emptyTitle": "Aún no hay semanas",
+      "emptyDescription": "Aquí irán las semanas y los días."
     }
   }
 }

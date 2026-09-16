@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
+import { Heading } from "@/components/ui/heading";
 import {
   filterExercises,
   searchExercises,
@@ -26,9 +27,7 @@ export const ExercisesLibrary = ({ exercises }: { exercises: Exercise[] }) => {
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-baseline gap-2">
-          <h1 className="text-2xl font-semibold tracking-tight">
-            {t("pageTitle")}
-          </h1>
+          <Heading>{t("pageTitle")}</Heading>
           <span className="text-sm text-muted-foreground">
             {exercises.length}
           </span>

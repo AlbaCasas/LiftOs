@@ -22,7 +22,7 @@ Work **in order**. A later milestone stays Backlog until the previous one can sh
 ## Next (production path)
 
 1. **Exercise library** — [ACZ-17](https://linear.app/acz-dev/issue/ACZ-17) seed, [ACZ-19](https://linear.app/acz-dev/issue/ACZ-19) create. Barbell only. After auth.
-2. **Blocks** — [ACZ-18](https://linear.app/acz-dev/issue/ACZ-18) domain, [ACZ-20](https://linear.app/acz-dev/issue/ACZ-20) editor, [ACZ-21](https://linear.app/acz-dev/issue/ACZ-21) assign.
+2. **Blocks** — [ACZ-34](https://linear.app/acz-dev/issue/ACZ-34) list + create (this branch). Editor grid and assign stay later.
 3. **AI chat** — [ACZ-22](https://linear.app/acz-dev/issue/ACZ-22) docked on the editor; coach accepts/edits.
 4. **Usage + Stripe** — [ACZ-23](https://linear.app/acz-dev/issue/ACZ-23) meter, [ACZ-24](https://linear.app/acz-dev/issue/ACZ-24) pay. Do not build Stripe before a metered AI call exists.
 

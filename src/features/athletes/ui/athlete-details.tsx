@@ -3,12 +3,12 @@ import { ArrowLeft } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Heading } from "@/components/ui/heading";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { totalKg } from "@/features/athletes/domain/total-kg";
 import { cn } from "@/lib/cn";
@@ -90,9 +90,7 @@ export const AthleteDetails = ({ athlete }: { athlete: Athlete }) => {
 
       <Card>
         <CardHeader className="border-b">
-          <CardTitle className="font-heading text-2xl font-semibold">
-            {athlete.name}
-          </CardTitle>
+          <Heading>{athlete.name}</Heading>
           <CardDescription className="flex flex-wrap gap-2 pt-2">
             <Badge>{t(`genderValue.${athlete.gender}`)}</Badge>
             <Badge variant="secondary">
