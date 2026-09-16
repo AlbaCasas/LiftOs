@@ -31,12 +31,9 @@ const BlockTableRow = ({ block }: { block: TrainingBlock }) => {
   return (
     <TableRow className="relative">
       <TableCell className="py-3 pl-4 font-medium">
-        <Link
-          href={`/blocks/${block.id}`}
-          prefetch={false}
-          className="after:absolute after:inset-0"
-        >
+        <Link href={`/blocks/${block.id}`} prefetch={false}>
           {block.name}
+          <span className="absolute inset-0" aria-hidden="true" />
         </Link>
       </TableCell>
       <TableCell className="py-3 text-muted-foreground">
