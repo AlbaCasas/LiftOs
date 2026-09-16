@@ -1,34 +1,37 @@
 "use client";
 
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { patternFilters, type PatternFilter } from "../domain/exercise";
+import {
+  patternFilterHref,
+  patternFilters,
+  type PatternFilter,
+} from "../domain/exercise";
 
-export const PatternTabs = ({
-  value,
-  onChange,
-}: {
-  value: PatternFilter;
-  onChange: (patternFilter: PatternFilter) => void;
-}) => {
+export const PatternTabs = ({ value }: { value: PatternFilter }) => {
   const t = useTranslations("Exercises");
 
   return (
-    <Tabs
-      value={value}
-      onValueChange={(nextValue) => onChange(nextValue as PatternFilter)}
-    >
+    <Tabs value={value}>
       <TabsList variant="line">
         {patternFilters.map((patternFilter) => (
           <TabsTrigger
             key={patternFilter}
             value={patternFilter}
             className="cursor-pointer"
+            asChild
           >
-            {patternFilter === "all"
-              ? t("tabs.all")
-              : t(`patternValue.${patternFilter}`)}
+            <Link
+              href={patternFilterHref(patternFilter)}
+              prefetch={false}
+              scroll={false}
+            >
+              {patternFilter === "all"
+                ? t("tabs.all")
+                : t(`patternValue.${patternFilter}`)}
+            </Link>
           </TabsTrigger>
         ))}
       </TabsList>
