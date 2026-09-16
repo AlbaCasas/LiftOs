@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -13,6 +16,8 @@ import {
 import type { Athlete } from "@/features/athletes/domain/athlete";
 import type { AthleteWithAvatar } from "@/features/athletes/domain/athlete-avatar";
 import { totalKg } from "@/features/athletes/domain/total-kg";
+import { toBlockAthleteOption } from "@/features/blocks/domain/block";
+import { BlockCreateDialog } from "@/features/blocks/ui/block-create-dialog";
 import { cn } from "@/lib/cn";
 import { AthleteAvatar } from "./athlete-avatar";
 
@@ -34,6 +39,9 @@ const liftColumns = [
   },
   { key: "total", getValue: totalKg, emphasized: true },
 ] as const;
+
+const rowActionClassName =
+  "opacity-0 group-hover:opacity-100 focus-visible:opacity-100";
 
 const EmptyList = ({ isSearch }: { isSearch: boolean }) => {
   const t = useTranslations("Athletes");
@@ -58,10 +66,7 @@ const KgCell = ({
   emphasized?: boolean;
 }) => (
   <TableCell
-    className={cn(
-      "py-3 text-right tabular-nums",
-      emphasized && "pr-6 font-medium",
-    )}
+    className={cn("py-3 text-right tabular-nums", emphasized && "font-medium")}
   >
     {value}
   </TableCell>
@@ -69,14 +74,15 @@ const KgCell = ({
 
 const AthleteTableRow = ({ athlete }: { athlete: AthleteWithAvatar }) => {
   const t = useTranslations("Athletes");
+  const lockedAthlete = toBlockAthleteOption(athlete);
 
   return (
-    <TableRow className="relative">
+    <TableRow className="group relative isolate">
       <TableCell className="py-3 pl-4">
         <Link
           href={`/athletes/${athlete.id}`}
           prefetch={false}
-          className="flex items-center gap-3 after:absolute after:inset-0"
+          className="flex items-center gap-3 after:absolute after:inset-0 after:z-0"
         >
           <AthleteAvatar {...athlete.avatar} />
           <span className="min-w-0">
@@ -98,6 +104,29 @@ const AthleteTableRow = ({ athlete }: { athlete: AthleteWithAvatar }) => {
           emphasized={column.emphasized}
         />
       ))}
+      <TableCell className="relative z-10 py-3 pr-4 text-right">
+        <div className="flex justify-end gap-1">
+          <Button
+            variant="ghost"
+            size="sm"
+            className={rowActionClassName}
+            asChild
+          >
+            <Link href={`/athletes/${athlete.id}`} prefetch={false}>
+              {t("edit")}
+            </Link>
+          </Button>
+          <BlockCreateDialog
+            athletes={[lockedAthlete]}
+            lockedAthlete={lockedAthlete}
+            trigger={
+              <Button variant="ghost" size="sm" className={rowActionClassName}>
+                {t("newBlock")}
+              </Button>
+            }
+          />
+        </div>
+      </TableCell>
     </TableRow>
   );
 };
@@ -127,14 +156,15 @@ export const AthleteTable = ({
             {liftColumns.map((column) => (
               <TableHead
                 key={column.key}
-                className={cn(
-                  "text-right text-muted-foreground",
-                  column.emphasized && "pr-6",
-                )}
+                className="text-right text-muted-foreground"
               >
                 {t(`table.${column.key}`)}
               </TableHead>
             ))}
+            <TableHead className="pr-4">
+              <span className="sr-only">{t("edit")}</span>
+              <span className="sr-only">{t("newBlock")}</span>
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
