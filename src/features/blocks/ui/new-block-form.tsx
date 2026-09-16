@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTransition } from "react";
+import { useTransition, type FormEvent } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 
@@ -34,11 +34,11 @@ export const NewBlockForm = ({
     setError,
     formState: { errors },
   } = useForm<NewBlockDraft>({
-    resolver: zodResolver(newBlockDraftSchema, undefined, { raw: true }),
+    resolver: zodResolver(newBlockDraftSchema),
     defaultValues: emptyNewBlockDraft,
   });
 
-  const onSubmit = handleSubmit((draft) => {
+  const saveBlock = handleSubmit((draft) => {
     startTransition(async () => {
       const result = await createBlock(draft);
       if (result && !result.ok) {
@@ -49,6 +49,11 @@ export const NewBlockForm = ({
     });
   });
 
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    void saveBlock(event);
+  };
+
   return (
     <form onSubmit={onSubmit} noValidate className="flex flex-col gap-4">
       <div className="flex flex-col gap-1.5">
@@ -58,7 +63,13 @@ export const NewBlockForm = ({
             *
           </span>
         </Label>
-        <NativeSelect id="athleteId" {...register("athleteId")} autoFocus>
+        <NativeSelect
+          id="athleteId"
+          aria-invalid={Boolean(errors.athleteId)}
+          aria-describedby={errors.athleteId ? "athlete-error" : undefined}
+          autoFocus
+          {...register("athleteId")}
+        >
           <option value="">
             {athletes.length > 0 ? t("form.select") : t("form.noAthletes")}
           </option>
@@ -82,8 +93,10 @@ export const NewBlockForm = ({
         </Label>
         <Input
           id="name"
-          {...register("name")}
+          aria-invalid={Boolean(errors.name)}
+          aria-describedby={errors.name ? "name-error" : undefined}
           placeholder={t("form.namePlaceholder")}
+          {...register("name")}
         />
         {errors.name?.message ? (
           <FieldError id="name-error">{t("form.errors.required")}</FieldError>
