@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTransition, type FormEvent } from "react";
+import { useTransition, type SubmitEvent } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 
@@ -49,7 +49,7 @@ export const NewBlockForm = ({
     });
   });
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     void saveBlock(event);
   };
