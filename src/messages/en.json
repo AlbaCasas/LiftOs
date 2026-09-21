@@ -38,6 +38,8 @@
   "Athletes": {
     "pageTitle": "Athletes",
     "addAthlete": "Add athlete",
+    "edit": "Edit",
+    "newBlock": "New block",
     "backToList": "Athletes",
     "kg": "kg",
     "search": {
@@ -165,6 +167,7 @@
       "select": "Select",
       "noAthletes": "Add an athlete first",
       "namePlaceholder": "e.g. 8 weeks — hypertrophy",
+      "athleteLockedHint": "Who this block is for",
       "create": "Create",
       "creating": "Creating…",
       "cancel": "Cancel",
