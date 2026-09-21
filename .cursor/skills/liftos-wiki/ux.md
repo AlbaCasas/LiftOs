@@ -28,7 +28,7 @@ Quick actions in chat (Semrush / Grammarly): “Add a squat week”, “Deload w
 
 [Hevy — Add Exercise](https://mobbin.com/screens/5c6fc454-8ab5-4278-9221-4e5b14bbdcce): search, equipment/muscle chips, **Custom** section first, sticky **Add N exercises**, header **Create**. [Gymshark](https://mobbin.com/screens/c26e68e5-fd18-4930-8d16-a1bf6a978579) / [Bevel](https://mobbin.com/screens/b8c914e6-092d-40d1-8e63-a1b0e5e5a0bf): multi-select + count on the CTA; “Add custom” as a row.
 
-LiftOS: barbell only. No video catalog. Picker is a sheet/dialog over the grid.
+LiftOS: barbell only. No video catalog. Picker is a sheet/dialog over the grid. Pattern tabs live in `?pattern=`.
 
 ### Blocks list
 

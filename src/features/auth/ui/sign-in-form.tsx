@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState, type SubmitEvent } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
@@ -22,6 +22,19 @@ import { ContinueWithOAuth } from "./continue-with-oauth";
 export const SignInForm = () => {
   const t = useTranslations("Auth");
   const [state, action, pending] = useActionState(signInCoach, undefined);
+  const [clientMessage, setClientMessage] = useState<string>();
+
+  const onSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+    const formData = new FormData(event.currentTarget);
+    const email = String(formData.get("email") ?? "").trim();
+    const password = String(formData.get("password") ?? "");
+    if (!email || !password) {
+      event.preventDefault();
+      setClientMessage(t("missingCredentials"));
+      return;
+    }
+    setClientMessage(undefined);
+  };
 
   return (
     <div className="flex min-h-svh items-center justify-center p-6">
@@ -40,7 +53,12 @@ export const SignInForm = () => {
               </span>
             </span>
           </div>
-          <form action={action} className="flex flex-col gap-4" noValidate>
+          <form
+            action={action}
+            onSubmit={onSubmit}
+            className="flex flex-col gap-4"
+            noValidate
+          >
             <div className="flex flex-col gap-1.5">
               <Label htmlFor="email">{t("email")}</Label>
               <Input
@@ -62,7 +80,9 @@ export const SignInForm = () => {
                 required
               />
             </div>
-            {state?.message ? <FieldError>{state.message}</FieldError> : null}
+            {clientMessage ?? state?.message ? (
+              <FieldError>{clientMessage ?? state?.message}</FieldError>
+            ) : null}
             <Button type="submit" size="lg" className="w-full" disabled={pending}>
               {pending ? t("submitting") : t("submitSignIn")}
             </Button>

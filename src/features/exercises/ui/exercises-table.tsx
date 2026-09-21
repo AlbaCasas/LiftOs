@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import type { Exercise } from "../domain/exercise";
+import { ExerciseDeleteDialog } from "./exercise-delete-dialog";
 import { ExerciseDialog } from "./exercise-dialog";
 
 const EmptyLibrary = ({ isSearch }: { isSearch: boolean }) => {
@@ -50,7 +51,10 @@ const ExerciseTableRow = ({
         )}
       </TableCell>
       <TableCell className="py-3 pr-4 text-right">
-        <ExerciseDialog exercise={exercise} />
+        <div className="flex justify-end gap-1">
+          <ExerciseDialog exercise={exercise} />
+          <ExerciseDeleteDialog exercise={exercise} />
+        </div>
       </TableCell>
     </TableRow>
   );
@@ -87,6 +91,7 @@ export const ExercisesTable = ({
             </TableHead>
             <TableHead className="pr-4">
               <span className="sr-only">{t("edit")}</span>
+              <span className="sr-only">{t("delete")}</span>
             </TableHead>
           </TableRow>
         </TableHeader>
