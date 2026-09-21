@@ -7,11 +7,11 @@ export const exerciseDraftSchema = z
     id: z.string().min(1, { error: "required" }),
     name: z.string().trim().min(1, { error: "required" }),
     pattern: z.enum(patterns, { error: "required" }),
-    isMeetLift: z.enum(["true", "false"]),
+    isMeetLift: z.boolean(),
   })
   .transform((draft) => ({
     id: draft.id,
     name: draft.name,
     pattern: draft.pattern,
-    isMeetLift: draft.pattern === "other" ? false : draft.isMeetLift === "true",
+    isMeetLift: draft.pattern === "other" ? false : draft.isMeetLift,
   }));

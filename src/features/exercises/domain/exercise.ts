@@ -12,7 +12,7 @@ export type ExerciseDraft = {
   id: string;
   name: string;
   pattern: Pattern;
-  isMeetLift: "true" | "false";
+  isMeetLift: boolean;
 };
 
 export type NewExerciseDraft = {
@@ -30,6 +30,19 @@ export const emptyNewExerciseDraft: NewExerciseDraft = {
 export type PatternFilter = "all" | Pattern;
 
 export const patternFilters = ["all", ...patterns] as const;
+
+export const isPatternFilter = (value: string): value is PatternFilter =>
+  (patternFilters as readonly string[]).includes(value);
+
+export const patternFilterFromParam = (
+  value: string | string[] | undefined,
+): PatternFilter => {
+  const raw = Array.isArray(value) ? value[0] : value;
+  return raw && isPatternFilter(raw) ? raw : "all";
+};
+
+export const patternFilterHref = (patternFilter: PatternFilter) =>
+  patternFilter === "all" ? "/exercises" : `/exercises?pattern=${patternFilter}`;
 
 export const filterExercises = (
   exercises: Exercise[],

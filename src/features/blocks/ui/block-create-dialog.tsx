@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/button";
@@ -17,8 +17,12 @@ import { NewBlockForm } from "./new-block-form";
 
 export const BlockCreateDialog = ({
   athletes,
+  lockedAthlete,
+  trigger,
 }: {
   athletes: BlockAthleteOption[];
+  lockedAthlete?: BlockAthleteOption;
+  trigger?: ReactNode;
 }) => {
   const [open, setOpen] = useState(false);
   const t = useTranslations("Blocks");
@@ -26,7 +30,7 @@ export const BlockCreateDialog = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>{t("addBlock")}</Button>
+        {trigger ?? <Button>{t("addBlock")}</Button>}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -34,8 +38,9 @@ export const BlockCreateDialog = ({
           <DialogDescription>{t("form.description")}</DialogDescription>
         </DialogHeader>
         <NewBlockForm
-          key={open ? "open" : "closed"}
+          key={open ? (lockedAthlete?.id ?? "open") : "closed"}
           athletes={athletes}
+          lockedAthlete={lockedAthlete}
           onSuccess={() => setOpen(false)}
         />
       </DialogContent>

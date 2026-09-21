@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { useTranslations } from "next-intl";
 
 import { Badge } from "@/components/ui/badge";
@@ -10,6 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import type { Exercise } from "../domain/exercise";
+import { ExerciseDeleteDialog } from "./exercise-delete-dialog";
 import { ExerciseDialog } from "./exercise-dialog";
 
 const EmptyLibrary = ({ isSearch }: { isSearch: boolean }) => {
@@ -35,10 +39,19 @@ const ExerciseTableRow = ({
   showPattern: boolean;
 }) => {
   const t = useTranslations("Exercises");
+  const [editOpen, setEditOpen] = useState(false);
 
   return (
-    <TableRow className="group">
-      <TableCell className="py-3 pl-4 font-medium">{exercise.name}</TableCell>
+    <TableRow className="group relative isolate cursor-pointer">
+      <TableCell className="py-3 pl-4 font-medium">
+        <button
+          type="button"
+          className="cursor-pointer bg-transparent p-0 text-left font-medium after:absolute after:inset-0 after:z-0"
+          onClick={() => setEditOpen(true)}
+        >
+          {exercise.name}
+        </button>
+      </TableCell>
       {showPattern && (
         <TableCell className="py-3 text-muted-foreground">
           {t(`patternShort.${exercise.pattern}`)}
@@ -49,8 +62,15 @@ const ExerciseTableRow = ({
           <Badge variant="outline">{t("table.meetLift")}</Badge>
         )}
       </TableCell>
-      <TableCell className="py-3 pr-4 text-right">
-        <ExerciseDialog exercise={exercise} />
+      <TableCell className="relative z-10 py-3 pr-4 text-right">
+        <div className="flex justify-end gap-1">
+          <ExerciseDialog
+            exercise={exercise}
+            open={editOpen}
+            onOpenChange={setEditOpen}
+          />
+          <ExerciseDeleteDialog exercise={exercise} />
+        </div>
       </TableCell>
     </TableRow>
   );
@@ -87,6 +107,7 @@ export const ExercisesTable = ({
             </TableHead>
             <TableHead className="pr-4">
               <span className="sr-only">{t("edit")}</span>
+              <span className="sr-only">{t("delete")}</span>
             </TableHead>
           </TableRow>
         </TableHeader>

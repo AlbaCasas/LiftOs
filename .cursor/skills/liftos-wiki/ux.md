@@ -12,6 +12,8 @@ Roster table (ACZ-10, Mobbin 2026-08-24): identity in the first column (initials
 
 LiftOS: same for athletes. One CTA. No Kajabi-style 12-step “new program” wizard — the coach already knows the athlete.
 
+Quiet hover **New block** next to **Edit** on the row ([ACZ-36](https://linear.app/acz-dev/issue/ACZ-36)). Same create dialog as Blocks; athlete prefilled and locked. Labeled actions, no kebab ([QuickBooks — Create invoice](https://mobbin.com/screens/6f60714f-f92b-4270-a236-115c4e1e6703)). Assign existing stays [ACZ-21](https://linear.app/acz-dev/issue/ACZ-21).
+
 ### Block editor + AI (the money screen)
 
 Split ~70 / 30:
@@ -28,11 +30,11 @@ Quick actions in chat (Semrush / Grammarly): “Add a squat week”, “Deload w
 
 [Hevy — Add Exercise](https://mobbin.com/screens/5c6fc454-8ab5-4278-9221-4e5b14bbdcce): search, equipment/muscle chips, **Custom** section first, sticky **Add N exercises**, header **Create**. [Gymshark](https://mobbin.com/screens/c26e68e5-fd18-4930-8d16-a1bf6a978579) / [Bevel](https://mobbin.com/screens/b8c914e6-092d-40d1-8e63-a1b0e5e5a0bf): multi-select + count on the CTA; “Add custom” as a row.
 
-LiftOS: barbell only. No video catalog. Picker is a sheet/dialog over the grid.
+LiftOS: barbell only. No video catalog. Picker is a sheet/dialog over the grid. Pattern tabs live in `?pattern=`. Library list: the whole row opens Edit; Delete stays a hover action.
 
 ### Blocks list
 
-Name | Athlete | Updated. The whole row opens the block. Create is a dialog: **athlete required**, then name (duration in the name). Stays on the list after create. No weeks on create. Unassigned / template later ([ACZ-34](https://linear.app/acz-dev/issue/ACZ-34)).
+Name | Athlete | Updated. The whole row opens the block. Create is a dialog: **athlete required**, then name (duration in the name). Stays on the list after create. No weeks on create. Unassigned / template later ([ACZ-34](https://linear.app/acz-dev/issue/ACZ-34)). Second door: Athletes row **New block** ([ACZ-36](https://linear.app/acz-dev/issue/ACZ-36)); athlete locked from that door.
 
 ### Free cap → pay
 

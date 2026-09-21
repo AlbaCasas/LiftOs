@@ -20,6 +20,7 @@
     "submitSignUp": "Create account",
     "submitting": "One moment…",
     "invalid": "Incorrect email or password",
+    "missingCredentials": "Email and password are required",
     "emailTaken": "An account with this email already exists",
     "passwordHint": "Password must be at least 8 characters",
     "failed": "Could not continue. Try again.",
@@ -37,6 +38,8 @@
   "Athletes": {
     "pageTitle": "Athletes",
     "addAthlete": "Add athlete",
+    "edit": "Edit",
+    "newBlock": "New block",
     "backToList": "Athletes",
     "kg": "kg",
     "search": {
@@ -99,6 +102,7 @@
     "pageTitle": "Exercises",
     "addExercise": "+ New",
     "edit": "Edit",
+    "delete": "Delete",
     "search": {
       "placeholder": "Search exercise",
       "title": "Search exercises",
@@ -120,15 +124,11 @@
       "deadlift": "DL",
       "other": "Other"
     },
-    "meetLiftValue": {
-      "true": "Yes",
-      "false": "No"
-    },
     "form": {
       "createTitle": "New exercise",
       "description": "Name, pattern, and whether it is a meet lift.",
       "namePlaceholder": "e.g. Tempo squat",
-      "meetLiftHint": "Check only if this is the meet lift",
+      "meetLiftHint": "On only if this is the meet lift",
       "create": "Create",
       "creating": "Creating…",
       "save": "Save",
@@ -136,6 +136,8 @@
       "cancel": "Cancel",
       "delete": "Delete",
       "deleting": "Deleting…",
+      "confirmDeleteTitle": "Delete this exercise?",
+      "confirmDeleteDescription": "This cannot be undone.",
       "failed": "Could not save. Try again.",
       "errors": {
         "required": "Required"
@@ -165,6 +167,7 @@
       "select": "Select",
       "noAthletes": "Add an athlete first",
       "namePlaceholder": "e.g. 8 weeks — hypertrophy",
+      "athleteLockedHint": "Who this block is for",
       "create": "Create",
       "creating": "Creating…",
       "cancel": "Cancel",
